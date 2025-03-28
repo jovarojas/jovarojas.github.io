@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="simulador unach preuniversitario San Marcos Riobamba">
-	<meta name="keywords" content="simulador, unach, ingreso, universidad, practic">
-	<meta name="author" content="Jovanna Rojas">
-    <title>SIMULADOR 1 UNACH</title> <!--colores #00345d #ffff00-->
-    <style>
+    <meta name="keywords" content="simulador, unach, ingreso, universidad, practic">
+    <meta name="author" content="Jovanna Rojas Malave">
+    <title>SIMULADOR 1 UNACH</title> 
 
-        *{
-            font-family:Arial, Helvetica, sans-serif;
+    <!--
+    Autor: Jovanna Rojas Malave
+    GitHub: https://github.com/jovarojas
+    LinkedIn: https://www.linkedin.com/in/jovanna-rojas-651574257/ -->
+
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
@@ -19,38 +24,51 @@
             font-size: 150%;
         }
 
-        footer,h2 {
+        footer, h2 {
             text-align: center;
         }
 
-        h2{
+        h2 {
             line-height: 100px;
-            background-color:#00345d;
-            color:white;
+            background-color: #00345d;
+            color: white;
         }
 
-        footer{
+        #login{
+            position: relative;
+        }
+
+            [alt*="fija"]{
+            border-radius: 50%;
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            max-height: 100px;
+            width: auto;
+            }
+
+        footer {
             background-color: lightgray;
             border: #00345d groove 2px;
             padding: 10px;
             font-weight: bold;
         }
 
-        header img{
+        header img {
             float: left;
         }
 
-        #quiz{
+        #quiz {
             clear: both;
             overflow: hidden;
         }
 
-        .cuadrado{
+        .cuadrado {
             width: 150px;
             height: 150px;
         }
 
-        .rectangulo{
+        .rectangulo {
             height: 150px;
             width: 400px;
         }
@@ -64,12 +82,12 @@
             padding: 10px;
         }
 
-        input{
+        input {
             margin: 10px 5px;
             transform: scale(1.3);
         }
 
-        p + img {
+        p+img {
             margin-left: 5px;
         }
 
@@ -119,1020 +137,1215 @@
             margin: 10px;
         }
 
-        #prevButton{
+        #prevButton {
             float: left;
             clear: both;
         }
 
-        #nextButton{
+        #nextButton {
             float: right;
-        
+
         }
 
-        #reiniciar{
+        #reiniciar {
             float: left;
             margin-top: 24px;
         }
 
-        /* Media Query para pantallas pequeñas */
-    @media screen and (max-width: 768px) {
-        body {
-            font-size: 120%;
-            margin: 10px;
+        #passwordInput {
+            margin-right: 30px;
+
         }
 
-        h2 {
-            font-size: 20px;
-            line-height: normal;
-            padding: 10px;
-        }
 
-        header img {
-            float: none;
-            display: block;
-            margin: 0 auto;
-        }
+        /* Adaptación para pantallas moviles */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 120%;
+                margin: 10px;
+            }
 
-        #quiz {
-            width: 100%;
-        }
+            h2 {
+                font-size: 20px;
+                line-height: normal;
+                padding: 10px;
+            }
 
-        .pregunta {
-            width: 100%;
-            float: none;
-        }
+            header img {
+                float: none;
+                display: block;
+                margin: 0 auto;
+            }
 
-        .pregunta img {
-            width: 100%;
-            max-width: 300px;
-        }
+            #quiz {
+                width: 100%;
+            }
 
-        #timer, #contador {
-            font-size: 16px;
-            float: none;
-            display: block;
-            text-align: center;
-            width: 100%;
-        }
+            .pregunta {
+                width: 100%;
+                float: none;
+            }
 
-        button {
-            width: 100%;
-            font-size: 18px;
-        }
+            .pregunta img {
+                width: 100%;
+                max-width: 300px;
+            }
 
-        #prevButton, #nextButton {
-            float: none;
-            display: block;
-            width: 98%;
-            text-align: center;
-        }
+            #timer,
+            #contador {
+                font-size: 16px;
+                float: none;
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
 
-        #reiniciar {
-            float: none;
-            display: block;
-            margin: 10px auto;
-            text-align: center;
-        }
+            button {
+                width: 100%;
+                font-size: 18px;
+            }
 
-        .pregunta p {
-            margin: 16px;
-        }
+            #prevButton,
+            #nextButton {
+                float: none;
+                display: block;
+                width: 98%;
+                text-align: center;
+            }
 
-        table{
-            margin-right: 16px;
-        }
-    }
+            #reiniciar {
+                float: none;
+                display: block;
+                margin: 10px auto;
+                text-align: center;
+            }
 
+            .pregunta p {
+                margin: 16px;
+            }
+
+            table {
+                margin-right: 16px;
+            }
+        }
     </style>
 </head>
 
-<body>
-    <header>
-        <img src="images/logo.png" alt="logo del preuniversitario">
-        <h2>SIMULADOR UNACH<br>PREUNIVERSITARIO SAN MARCOS</h2>
-        <button onclick="reiniciarTest()" id="reiniciar">Reiniciar Test</button>
-        <p id="timer">Tiempo restante: 60:00</p>
-    </header>
+<body onload="pedirContraseña()">
+    <div id="login" style="text-align:center; padding: 20px;">
+        <h2>Ingrese la contraseña para acceder al test</h2>
+        <input type="password" id="passwordInput">
+        <button onclick="verificarContraseña()">Ingresar</button>
+        <img src="images/logo.png" alt="imagen fija">
+    </div>
 
-    <div id="quiz">
-        <p id="contador">Pregunta 1 de 80</p>
-        <div class="pregunta active">
-            <p>En una investigación de neurología, Se estudia la percepción visual mediante una cuadrícula codificada
-                por letras y números, al investigador se le pide que identifique la codificación que se forma con el
-                símbolo |┌</p>
-            <img src="images/1.png" alt="imagen de letras raras pregunta 1"><br>
-            <input type="radio" name="q1" value="a">A3,B1,C3,D4,E5<br>
-            <input type="radio" name="q1" value="b">A3,B2,C3,D4,E5<br>
-            <input type="radio" name="q1" value="c">A3,B1,C4,D4,E5<br>
-            <input type="radio" name="q1" value="d">A3,B1,C3,D1,E5<br>
-        </div>
+    <div id="contenidoTest" style="display: none;">
+        <header>
+            <img src="images/logo.png" alt="logo del preuniversitario">
+            <h2>SIMULADOR UNACH<br>PREUNIVERSITARIO SAN MARCOS</h2>
+            <button onclick="reiniciarTest()" id="reiniciar">Reiniciar Test</button>
+            <p id="timer">Tiempo restante: 60:00</p>
+        </header>
 
-        <div class="pregunta">
-            <p>En un restaurante llamado "Colle Break", para retirar el pedido de una orden de comida, la cajera debe
-                llamar por el nombre al cliente. Se requiere encontrar, entre las respuestas, el nombre similar al que
-                se muestra a continuación<br><b>Jonathan Ezequiel Román Fernández</b></p>
-            <input type="radio" name="q2" value="a">Jhonathan Ezequiel Roman Fernández<br>
-            <input type="radio" name="q2" value="b">Jhonnathan Ezeqiuel Román Fernández<br>
-            <input type="radio" name="q2" value="c">Jhonnathan Ezequiel Román Fernández<br>
-            <input type="radio" name="q2" value="d">Jonathan Ezequiel Román Fernández<br>
-        </div>
+        <div id="quiz">
+            <p id="contador">Pregunta 1 de 80</p>
+            <div class="pregunta active">
+                <p>En una investigación de neurología, Se estudia la percepción visual mediante una cuadrícula
+                    codificada
+                    por letras y números, al investigador se le pide que identifique la codificación que se forma con el
+                    símbolo |┌</p>
+                <img src="images/1.png" alt="imagen de letras raras pregunta 1"><br>
+                <input type="radio" name="q1" value="a">A3,B1,C3,D4,E5<br>
+                <input type="radio" name="q1" value="b">A3,B2,C3,D4,E5<br>
+                <input type="radio" name="q1" value="c">A3,B1,C4,D4,E5<br>
+                <input type="radio" name="q1" value="d">A3,B1,C3,D1,E5<br>
+            </div>
 
-        <div class="pregunta">
-            <p> En la clase de secuencias gráficas, el docente le presenta a Verónica, una secuencia de figuras. Le pide
-                encontrar, entre las respuestas, la figura que continua en la siguiente secuencia</p>
-            <img src="images/2.png" alt="imagen principal pregunta 2"><br>
-            <input type="radio" name="q3" value="a"><img src="images/3.png" class="cuadrado"><br>
-            <input type="radio" name="q3" value="b"><img src="images/4.png" class="cuadrado"><br>
-            <input type="radio" name="q3" value="c"><img src="images/5.png" class="cuadrado"><br>
-            <input type="radio" name="q3" value="d"><img src="images/6.png" class="cuadrado"><br>
-        </div>
+            <div class="pregunta">
+                <p>En un restaurante llamado "Colle Break", para retirar el pedido de una orden de comida, la cajera
+                    debe
+                    llamar por el nombre al cliente. Se requiere encontrar, entre las respuestas, el nombre similar al
+                    que
+                    se muestra a continuación<br><b>Jonathan Ezequiel Román Fernández</b></p>
+                <input type="radio" name="q2" value="a">Jhonathan Ezequiel Roman Fernández<br>
+                <input type="radio" name="q2" value="b">Jhonnathan Ezeqiuel Román Fernández<br>
+                <input type="radio" name="q2" value="c">Jhonnathan Ezequiel Román Fernández<br>
+                <input type="radio" name="q2" value="d">Jonathan Ezequiel Román Fernández<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Para un evento social, se necesita comprar un tipo de amplificador de sonido, el cual, mantiene una
-                codificación Descubra, entre las respuestas, el código idéntico al que se presenta a
-                continuación:<br><b>M8860268-LMO0863-869781CN369</b></p>
-            Seleccione una:<br>
-            <input type="radio" name="q4" value="a">M8860268-LMO0363-869731CN369<br>
-            <input type="radio" name="q4" value="b">M8860268-LMO0863-869787CN369<br>
-            <input type="radio" name="q4" value="c">M8860268-LMO0863-869781CM369<br>
-            <input type="radio" name="q4" value="d">M8860268-LMO0863-869781CN369<br>
-        </div>
+            <div class="pregunta">
+                <p> En la clase de secuencias gráficas, el docente le presenta a Verónica, una secuencia de figuras. Le
+                    pide
+                    encontrar, entre las respuestas, la figura que continua en la siguiente secuencia</p>
+                <img src="images/2.png" alt="imagen principal pregunta 2"><br>
+                <input type="radio" name="q3" value="a"><img src="images/3.png" class="cuadrado"><br>
+                <input type="radio" name="q3" value="b"><img src="images/4.png" class="cuadrado"><br>
+                <input type="radio" name="q3" value="c"><img src="images/5.png" class="cuadrado"><br>
+                <input type="radio" name="q3" value="d"><img src="images/6.png" class="cuadrado"><br>
+            </div>
 
-        <div class="pregunta">
-            <p>Jonnathan debe cancelar una transferencia interbancaria que se realizó desde la banca web, para ello,
-                necesita el código del comprobante, se requiere encontrar, entre las respuestas, la codificación
-                idéntica a la que se muestra a continuación:<br><b>133806360-GMEIR- SRPEN</b></p>
-            Seleccione una:<br>
-            <input type="radio" name="q5" value="a">133BO6360-GMIER-SRPEN<br>
-            <input type="radio" name="q5" value="b">133806360-GMEIR- SRPEN<br>
-            <input type="radio" name="q5" value="c">133803660-GMEIR-RSPEN<br>
-            <input type="radio" name="q5" value="d">13E806360-GMEIR- SRPEN<br>
-        </div>
+            <div class="pregunta">
+                <p>Para un evento social, se necesita comprar un tipo de amplificador de sonido, el cual, mantiene una
+                    codificación Descubra, entre las respuestas, el código idéntico al que se presenta a
+                    continuación:<br><b>M8860268-LMO0863-869781CN369</b></p>
+                Seleccione una:<br>
+                <input type="radio" name="q4" value="a">M8860268-LMO0363-869731CN369<br>
+                <input type="radio" name="q4" value="b">M8860268-LMO0863-869787CN369<br>
+                <input type="radio" name="q4" value="c">M8860268-LMO0863-869781CM369<br>
+                <input type="radio" name="q4" value="d">M8860268-LMO0863-869781CN369<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Varios aspirantes se encuentran rindiendo una evaluación de ingreso a la fuerza pública, en esta les
-                presentan 2 tablas. Se debe descubrir la palabra que se forma con las letras de la tabla 2, utilizando
-                el patrón que se encuentra en la tabla 1 Identifica la palabra.</p>
-            Seleccione una:<br>
-            <table>
-                <tr>
-                    <th>TABLA 1</th>
-                    <th>TABLA 2</th>
-                </tr>
-                <tr>
-                    <td><img src="images/7.png" alt="tabla 1"></td>
-                    <td><img src="images/8.png" alt="tabla 2"></td>
-                </tr>
-            </table>
-            <input type="radio" name="q6" value="a">ESFUERZO<br>
-            <input type="radio" name="q6" value="b">ESFUERZA<br>
-            <input type="radio" name="q6" value="c">ESPARZA<br>
-            <input type="radio" name="q6" value="d">ESPERANZA<br>
-        </div>
-        <div class="pregunta">
-            <p>David es un estudiante que está entrenando la lecto escritura, por esta razón se encuentra realizando una
-                actividad en la cual, se debe identificar el número de fila en la que se encuentra el grupo que contiene
-                una letra diferente</p>
-            <img src="images/9.png" alt="filas y letras"> <br>
-            <input type="radio" name="q7" value="a">Fila 1<br>
-            <input type="radio" name="q7" value="b">Fila 2<br>
-            <input type="radio" name="q7" value="c">Fila 3<br>
-            <input type="radio" name="q7" value="d">Fila 4<br>
-        </div>
-        <div class="pregunta">
-            <p> Al Iniciar las festividades de una localidad, se menciona entre los eventos sociales un concierto donde
-                se presentarán artistas internacionales.<br>Identifique, entre las respuestas, si el país y el nombre
-                del artista es igual o diferente en la siguiente tabla</p>
-            <img src="images/a.png" alt="pais y nombre"><br>
-            <input type="radio" name="q8" value="a">País igual y nombre igual<br>
-            <input type="radio" name="q8" value="b">País igual y nombre diferente<br>
-            <input type="radio" name="q8" value="c">País diferente y nombre diferente<br>
-            <input type="radio" name="q8" value="d">País diferente y nombre igual<br>
-        </div>
-        <div class="pregunta">
-            <p> Paúl se encuentra realizando una actividad que le envió su docente. Le pide identificar cuántos símbolos
-                <b>"f"</b> hay en la siguiente tabla:
-            </p>
-            <img src="images/b.png" alt="simbolos f"><br>
-            <input type="radio" name="q9" value="a">6<br>
-            <input type="radio" name="q9" value="b">5<br>
-            <input type="radio" name="q9" value="c">7<br>
-            <input type="radio" name="q9" value="d">4<br>
-        </div>
-        <div class="pregunta">
-            <p>Carlos envía una tarea a sus estudiantes, les entrega una plantilla y pide identificar cuántas veces se
-                repiten las letras (m) y (n).</p>
-            Seleccione la respuesta correcta:<br>
-            <img src="images/c.png" alt="ms y ns"><br>
-            <input type="radio" name="q10" value="a">m=14, n=10<br>
-            <input type="radio" name="q10" value="b">m=13, n=11<br>
-            <input type="radio" name="q10" value="c">m=15, n=11<br>
-            <input type="radio" name="q10" value="d">m=13, n=9<br>
-        </div>
-        <div class="pregunta">
-            <p>Jhonny, en la clase de Matemática. debe realizar una actividad de conteo numérico, para lo cual, le
-                entregan una cuadricula<br>Identifique cuántos números se repiten.</p>
-            <img src="images/d.png" alt="numeros que se repiten"><br>
-            <input type="radio" name="q11" value="a">5<br>
-            <input type="radio" name="q11" value="b">4<br>
-            <input type="radio" name="q11" value="c">6<br>
-            <input type="radio" name="q11" value="d">7<br>
-        </div>
-        <div class="pregunta">
-            <p>Luis se encuentra en una evaluación en Consejería Estudiantil de su unidad educativa, para ayudarte &
-                fortalecer su concentración, la psicóloga le pide identificar cuántos símbolos <span>ﯷ</span> iguales
-                existen en la tabla entregada</p>
-            <img src="images/e.png" alt="simbolos raros"><br>
-            <input type="radio" name="q12" value="a">8<br>
-            <input type="radio" name="q12" value="b">9<br>
-            <input type="radio" name="q12" value="c">10<br>
-            <input type="radio" name="q12" value="d">12<br>
-        </div>
-        <div class="pregunta">
-            <p> Andrés se encuentra asignando estudiantes de nuevo ingreso a los cursos de la escuela de manera
-                ascendente, según sus edades: Adrián es mayor que Verónica, pero menor que Sofia, Daniel es mayor que
-                Verónica y Adrián, pero menor que Sofía. Identifique en qué orden se debe asignar a los estudiantes.</p>
-            Seleccione una:<br>
-            <input type="radio" name="q13" value="a">Verónica, Adrián, Daniel, Sofia<br>
-            <input type="radio" name="q13" value="b">Adrián, Verónica, Daniel, Sofia<br>
-            <input type="radio" name="q13" value="c">Verónica, Daniel, Adrián, Sofia<br>
-            <input type="radio" name="q13" value="d">Adrián, Verónica, Sofia, Daniel<br>
-        </div>
-        <div class="pregunta">
-            <p>En un intento de encontrar un paquete de botellas plásticas perdidas, a Eduardo le entregan una
-                codificación, con la cual, se marcó el envió desde un almacén.<br>Identifique, entre las respuestas, el
-                código que contenga los mismos números al que se presenta a continuación.<br><b>5949499970</b></p>
-            <input type="radio" name="q14" value="a">0796649495<br>
-            <input type="radio" name="q14" value="b">0799064495<br>
-            <input type="radio" name="q14" value="c">0799949495<br>
-            <input type="radio" name="q14" value="d">0799479945<br>
-        </div>
-        <div class="pregunta">
-            <p>Jorge está realizando una tarea de Geometría, el docente pide identificar cuántos triángulos verdes y
-                cuantos triángulos amarillos, existen dentro de la plantilla entregada:</p>
-            <img src="images/f.png" alt="figuras de colores"><br>
-            <input type="radio" name="q15" value="a"><img src="images/g.png" class="rectangulo"><br>
-            <input type="radio" name="q15" value="b"><img src="images/h.png" class="rectangulo"><br>
-            <input type="radio" name="q15" value="c"><img src="images/i.png" class="rectangulo"><br>
-            <input type="radio" name="q15" value="d"><img src="images/j.png" class="rectangulo"><br>
-        </div>
-        <!--PREGUNTA 16 EN ADELANTE-->
-        <div class="pregunta">
-            <p>En una actividad áulica, de atención y concentración, el docente presenta 2 figuras que están
-                distribuidas indistintamente en una tabla, para el desarrollo de la actividad, se requiere que se
-                encuentre el número de figuras que existen de cada una</p>
-            <img src="images/k.png" alt="pregunta 16"><br>
-            <input type="radio" name="q16" value="a"><img src="images/l.png" class="rectangulo"><br>
-            <input type="radio" name="q16" value="b"><img src="images/m.png" class="rectangulo"><br>
-            <input type="radio" name="q16" value="c"><img src="images/n.png" class="rectangulo"><br>
-            <input type="radio" name="q16" value="d"><img src="images/o.png" class="rectangulo"><br>
-        </div>
+            <div class="pregunta">
+                <p>Jonnathan debe cancelar una transferencia interbancaria que se realizó desde la banca web, para ello,
+                    necesita el código del comprobante, se requiere encontrar, entre las respuestas, la codificación
+                    idéntica a la que se muestra a continuación:<br><b>133806360-GMEIR- SRPEN</b></p>
+                Seleccione una:<br>
+                <input type="radio" name="q5" value="a">133BO6360-GMIER-SRPEN<br>
+                <input type="radio" name="q5" value="b">133806360-GMEIR- SRPEN<br>
+                <input type="radio" name="q5" value="c">133803660-GMEIR-RSPEN<br>
+                <input type="radio" name="q5" value="d">13E806360-GMEIR- SRPEN<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Juan se encuentra en una mecánica con su vehículo. Para repararlo, necesita cambiar la bomba de
-                combustible que tiene una codificación única. Se requiere identificar, entre las respuestas, el código
-                idéntico al que se muestra a continuación:<br><b>OBD2 P0837 394958</b></p>
-            Seleccione la respuesta correcta:<br>
-            <input type="radio" name="q17" value="a">OBD2 P0337 394958<br>
-            <input type="radio" name="q17" value="b">OBD2 P0837 364958<br>
-            <input type="radio" name="q17" value="c">OBD2 P0837 394658<br>
-            <input type="radio" name="q17" value="d">OBD2 P0837 394958<br>
-        </div>
+            <div class="pregunta">
+                <p>Varios aspirantes se encuentran rindiendo una evaluación de ingreso a la fuerza pública, en esta les
+                    presentan 2 tablas. Se debe descubrir la palabra que se forma con las letras de la tabla 2,
+                    utilizando
+                    el patrón que se encuentra en la tabla 1 Identifica la palabra.</p>
+                Seleccione una:<br>
+                <table>
+                    <tr>
+                        <th>TABLA 1</th>
+                        <th>TABLA 2</th>
+                    </tr>
+                    <tr>
+                        <td><img src="images/7.png" alt="tabla 1"></td>
+                        <td><img src="images/8.png" alt="tabla 2"></td>
+                    </tr>
+                </table>
+                <input type="radio" name="q6" value="a">ESFUERZO<br>
+                <input type="radio" name="q6" value="b">ESFUERZA<br>
+                <input type="radio" name="q6" value="c">ESPARZA<br>
+                <input type="radio" name="q6" value="d">ESPERANZA<br>
+            </div>
+            <div class="pregunta">
+                <p>David es un estudiante que está entrenando la lecto escritura, por esta razón se encuentra realizando
+                    una
+                    actividad en la cual, se debe identificar el número de fila en la que se encuentra el grupo que
+                    contiene
+                    una letra diferente</p>
+                <img src="images/9.png" alt="filas y letras"> <br>
+                <input type="radio" name="q7" value="a">Fila 1<br>
+                <input type="radio" name="q7" value="b">Fila 2<br>
+                <input type="radio" name="q7" value="c">Fila 3<br>
+                <input type="radio" name="q7" value="d">Fila 4<br>
+            </div>
+            <div class="pregunta">
+                <p> Al Iniciar las festividades de una localidad, se menciona entre los eventos sociales un concierto
+                    donde
+                    se presentarán artistas internacionales.<br>Identifique, entre las respuestas, si el país y el
+                    nombre
+                    del artista es igual o diferente en la siguiente tabla</p>
+                <img src="images/a.png" alt="pais y nombre"><br>
+                <input type="radio" name="q8" value="a">País igual y nombre igual<br>
+                <input type="radio" name="q8" value="b">País igual y nombre diferente<br>
+                <input type="radio" name="q8" value="c">País diferente y nombre diferente<br>
+                <input type="radio" name="q8" value="d">País diferente y nombre igual<br>
+            </div>
+            <div class="pregunta">
+                <p> Paúl se encuentra realizando una actividad que le envió su docente. Le pide identificar cuántos
+                    símbolos
+                    <b>"f"</b> hay en la siguiente tabla:
+                </p>
+                <img src="images/b.png" alt="simbolos f"><br>
+                <input type="radio" name="q9" value="a">6<br>
+                <input type="radio" name="q9" value="b">5<br>
+                <input type="radio" name="q9" value="c">7<br>
+                <input type="radio" name="q9" value="d">4<br>
+            </div>
+            <div class="pregunta">
+                <p>Carlos envía una tarea a sus estudiantes, les entrega una plantilla y pide identificar cuántas veces
+                    se
+                    repiten las letras (m) y (n).</p>
+                Seleccione la respuesta correcta:<br>
+                <img src="images/c.png" alt="ms y ns"><br>
+                <input type="radio" name="q10" value="a">m=14, n=10<br>
+                <input type="radio" name="q10" value="b">m=13, n=11<br>
+                <input type="radio" name="q10" value="c">m=15, n=11<br>
+                <input type="radio" name="q10" value="d">m=13, n=9<br>
+            </div>
+            <div class="pregunta">
+                <p>Jhonny, en la clase de Matemática. debe realizar una actividad de conteo numérico, para lo cual, le
+                    entregan una cuadricula<br>Identifique cuántos números se repiten.</p>
+                <img src="images/d.png" alt="numeros que se repiten"><br>
+                <input type="radio" name="q11" value="a">5<br>
+                <input type="radio" name="q11" value="b">4<br>
+                <input type="radio" name="q11" value="c">6<br>
+                <input type="radio" name="q11" value="d">7<br>
+            </div>
+            <div class="pregunta">
+                <p>Luis se encuentra en una evaluación en Consejería Estudiantil de su unidad educativa, para ayudarte &
+                    fortalecer su concentración, la psicóloga le pide identificar cuántos símbolos <span>ﯷ</span>
+                    iguales
+                    existen en la tabla entregada</p>
+                <img src="images/e.png" alt="simbolos raros"><br>
+                <input type="radio" name="q12" value="a">8<br>
+                <input type="radio" name="q12" value="b">9<br>
+                <input type="radio" name="q12" value="c">10<br>
+                <input type="radio" name="q12" value="d">12<br>
+            </div>
+            <div class="pregunta">
+                <p> Andrés se encuentra asignando estudiantes de nuevo ingreso a los cursos de la escuela de manera
+                    ascendente, según sus edades: Adrián es mayor que Verónica, pero menor que Sofia, Daniel es mayor
+                    que
+                    Verónica y Adrián, pero menor que Sofía. Identifique en qué orden se debe asignar a los estudiantes.
+                </p>
+                Seleccione una:<br>
+                <input type="radio" name="q13" value="a">Verónica, Adrián, Daniel, Sofia<br>
+                <input type="radio" name="q13" value="b">Adrián, Verónica, Daniel, Sofia<br>
+                <input type="radio" name="q13" value="c">Verónica, Daniel, Adrián, Sofia<br>
+                <input type="radio" name="q13" value="d">Adrián, Verónica, Sofia, Daniel<br>
+            </div>
+            <div class="pregunta">
+                <p>En un intento de encontrar un paquete de botellas plásticas perdidas, a Eduardo le entregan una
+                    codificación, con la cual, se marcó el envió desde un almacén.<br>Identifique, entre las respuestas,
+                    el
+                    código que contenga los mismos números al que se presenta a continuación.<br><b>5949499970</b></p>
+                <input type="radio" name="q14" value="a">0796649495<br>
+                <input type="radio" name="q14" value="b">0799064495<br>
+                <input type="radio" name="q14" value="c">0799949495<br>
+                <input type="radio" name="q14" value="d">0799479945<br>
+            </div>
+            <div class="pregunta">
+                <p>Jorge está realizando una tarea de Geometría, el docente pide identificar cuántos triángulos verdes y
+                    cuantos triángulos amarillos, existen dentro de la plantilla entregada:</p>
+                <img src="images/f.png" alt="figuras de colores"><br>
+                <input type="radio" name="q15" value="a"><img src="images/g.png" class="rectangulo"><br>
+                <input type="radio" name="q15" value="b"><img src="images/h.png" class="rectangulo"><br>
+                <input type="radio" name="q15" value="c"><img src="images/i.png" class="rectangulo"><br>
+                <input type="radio" name="q15" value="d"><img src="images/j.png" class="rectangulo"><br>
+            </div>
+            <!--PREGUNTA 16 EN ADELANTE-->
+            <div class="pregunta">
+                <p>En una actividad áulica, de atención y concentración, el docente presenta 2 figuras que están
+                    distribuidas indistintamente en una tabla, para el desarrollo de la actividad, se requiere que se
+                    encuentre el número de figuras que existen de cada una</p>
+                <img src="images/k.png" alt="pregunta 16"><br>
+                <input type="radio" name="q16" value="a"><img src="images/l.png" class="rectangulo"><br>
+                <input type="radio" name="q16" value="b"><img src="images/m.png" class="rectangulo"><br>
+                <input type="radio" name="q16" value="c"><img src="images/n.png" class="rectangulo"><br>
+                <input type="radio" name="q16" value="d"><img src="images/o.png" class="rectangulo"><br>
+            </div>
 
-        <div class="pregunta">
-            <p>En la clase de Conducción, el instructor le presenta a David, una ilustración compuesta por flechas con
-                direcciones distintas. Le pide desarrollar una actividad, en la que, debe identificar cuántas flechas
-                hacia la izquierda y hacia la derecha existen.</p>
-            <img src="images/p.png" alt="flechas en ambos sentidos"><br>
-            <input type="radio" name="q18" value="a">flechas con dirección a la izquierda = 8; flechas con dirección a
-            la derecha = 8<br>
-            <input type="radio" name="q18" value="b">flechas con dirección a la izquierda = 8; flechas con dirección a
-            la derecha = 7<br>
-            <input type="radio" name="q18" value="c">flechas con dirección a la izquierda = 6; flechas con dirección a
-            la derecha = 7<br>
-            <input type="radio" name="q18" value="d">flechas con dirección a la izquierda = 7; flechas con dirección a
-            la derecha = 7<br>
-        </div>
+            <div class="pregunta">
+                <p>Juan se encuentra en una mecánica con su vehículo. Para repararlo, necesita cambiar la bomba de
+                    combustible que tiene una codificación única. Se requiere identificar, entre las respuestas, el
+                    código
+                    idéntico al que se muestra a continuación:<br><b>OBD2 P0837 394958</b></p>
+                Seleccione la respuesta correcta:<br>
+                <input type="radio" name="q17" value="a">OBD2 P0337 394958<br>
+                <input type="radio" name="q17" value="b">OBD2 P0837 364958<br>
+                <input type="radio" name="q17" value="c">OBD2 P0837 394658<br>
+                <input type="radio" name="q17" value="d">OBD2 P0837 394958<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Un policía detecta mediante el sistema computarizado que un vehículo sobrepasa los límites de velocidad,
-                mediante dicho sistema se visualiza la placa y el nombre del dueño del vehículo.<br>Identifique la placa
-                y el nombre del dueño del vehículo igual a la que se muestra a continuación:<br><b>XBL-0533/Jessica
-                    Janeth Quishpe Salazar</b></p>
-            <input type="radio" name="q19" value="a">XBL-0533/Jessica Janneth Quishpe Salasar<br>
-            <input type="radio" name="q19" value="b">XBL-0533/Jesica Janeth Quishpe Salazar<br>
-            <input type="radio" name="q19" value="c">XBL-0533/Jessica Janeth Quishpe Salazar<br>
-            <input type="radio" name="q19" value="d">XBL-0533/Jesica Janneth Quishpe Salasar<br>
-        </div>
+            <div class="pregunta">
+                <p>En la clase de Conducción, el instructor le presenta a David, una ilustración compuesta por flechas
+                    con
+                    direcciones distintas. Le pide desarrollar una actividad, en la que, debe identificar cuántas
+                    flechas
+                    hacia la izquierda y hacia la derecha existen.</p>
+                <img src="images/p.png" alt="flechas en ambos sentidos"><br>
+                <input type="radio" name="q18" value="a">flechas con dirección a la izquierda = 8; flechas con dirección
+                a
+                la derecha = 8<br>
+                <input type="radio" name="q18" value="b">flechas con dirección a la izquierda = 8; flechas con dirección
+                a
+                la derecha = 7<br>
+                <input type="radio" name="q18" value="c">flechas con dirección a la izquierda = 6; flechas con dirección
+                a
+                la derecha = 7<br>
+                <input type="radio" name="q18" value="d">flechas con dirección a la izquierda = 7; flechas con dirección
+                a
+                la derecha = 7<br>
+            </div>
 
-        <div class="pregunta">
-            <p>En una actividad de ejercicios visuales, a Marcelo se le presenta una secuencia alfabética en la cual se
-                requiere que se deduzca la tercera letra de la última serie:</p>
-            <b>DBC DEF DHI DKL DNÑ DP---</b><br>
-            <input type="radio" name="q20" value="a">R<br>
-            <input type="radio" name="q20" value="b">O<br>
-            <input type="radio" name="q20" value="c">Q<br>
-            <input type="radio" name="q20" value="d">P<br>
-        </div>
+            <div class="pregunta">
+                <p>Un policía detecta mediante el sistema computarizado que un vehículo sobrepasa los límites de
+                    velocidad,
+                    mediante dicho sistema se visualiza la placa y el nombre del dueño del vehículo.<br>Identifique la
+                    placa
+                    y el nombre del dueño del vehículo igual a la que se muestra a continuación:<br><b>XBL-0533/Jessica
+                        Janeth Quishpe Salazar</b></p>
+                <input type="radio" name="q19" value="a">XBL-0533/Jessica Janneth Quishpe Salasar<br>
+                <input type="radio" name="q19" value="b">XBL-0533/Jesica Janeth Quishpe Salazar<br>
+                <input type="radio" name="q19" value="c">XBL-0533/Jessica Janeth Quishpe Salazar<br>
+                <input type="radio" name="q19" value="d">XBL-0533/Jesica Janneth Quishpe Salasar<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Para descargar un formulario de salida de divisas, en una plataforma aduanera, un exportador deberá
-                completar una contraseña compuesta por 5 elementos. En la interfaz de la plataforma se muestran sus 4
-                primeros elementos:<br>bastidor. empalme, himno, kilometraje,</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña<br>
-            <input type="radio" name="q21" value="a">nupcias<br>
-            <input type="radio" name="q21" value="b">oriundo<br>
-            <input type="radio" name="q21" value="c">maniobra<br>
-            <input type="radio" name="q21" value="d">lámina<br>
-        </div>
+            <div class="pregunta">
+                <p>En una actividad de ejercicios visuales, a Marcelo se le presenta una secuencia alfabética en la cual
+                    se
+                    requiere que se deduzca la tercera letra de la última serie:</p>
+                <b>DBC DEF DHI DKL DNÑ DP---</b><br>
+                <input type="radio" name="q20" value="a">R<br>
+                <input type="radio" name="q20" value="b">O<br>
+                <input type="radio" name="q20" value="c">Q<br>
+                <input type="radio" name="q20" value="d">P<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Marco requiere completar la siguiente gráfica</p>
-            <img src="images/q.png" alt="pregunta 22"><br>
-            Aplicando los criterios de identificación de patrones, seleccione la opción que completará la secuencia:<br>
-            <input type="radio" name="q22" value="a"><img src="images/r.png" class="cuadrado"><br>
-            <input type="radio" name="q22" value="b"><img src="images/s.png" class="cuadrado"><br>
-            <input type="radio" name="q22" value="c"><img src="images/t.png" class="cuadrado"><br>
-            <input type="radio" name="q22" value="d"><img src="images/u.png" class="cuadrado"><br>
-        </div>
+            <div class="pregunta">
+                <p>Para descargar un formulario de salida de divisas, en una plataforma aduanera, un exportador deberá
+                    completar una contraseña compuesta por 5 elementos. En la interfaz de la plataforma se muestran sus
+                    4
+                    primeros elementos:<br>bastidor. empalme, himno, kilometraje,</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña<br>
+                <input type="radio" name="q21" value="a">nupcias<br>
+                <input type="radio" name="q21" value="b">oriundo<br>
+                <input type="radio" name="q21" value="c">maniobra<br>
+                <input type="radio" name="q21" value="d">lámina<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Para ganar una cocina de inducción en un programa de televisión, un participante deberá completar una
-                contraseña compuesta por 5 elementos. En la pantalla se muestran sus 4 primeros elementos:<br>diámetro,
-                hectárea, lustro, ocaso,</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña<br>
-            <input type="radio" name="q23" value="a">sobreviviente<br>
-            <input type="radio" name="q23" value="b">ubicación<br>
-            <input type="radio" name="q23" value="c">temporal<br>
-            <input type="radio" name="q23" value="d">retorna<br>
-        </div>
-        <div class="pregunta">
-            <p>Jeanneth requiere completar la siguiente gráfica</p>
-            <img src="images/v.png" alt="pizzas"><br>
-            Aplicando los criterios de identificación de patrones, seleccione la opción que completará la
-            secuencia.<br>Seleccione una:<br>
-            <input type="radio" name="q24" value="a"><img src="images/w.png" class="cuadrado"><br>
-            <input type="radio" name="q24" value="b"><img src="images/x.png" class="cuadrado"><br>
-            <input type="radio" name="q24" value="c"><img src="images/y.png" class="cuadrado"><br>
-            <input type="radio" name="q24" value="d"><img src="images/z.png" class="cuadrado"><br>
-        </div>
+            <div class="pregunta">
+                <p>Marco requiere completar la siguiente gráfica</p>
+                <img src="images/q.png" alt="pregunta 22"><br>
+                Aplicando los criterios de identificación de patrones, seleccione la opción que completará la
+                secuencia:<br>
+                <input type="radio" name="q22" value="a"><img src="images/r.png" class="cuadrado"><br>
+                <input type="radio" name="q22" value="b"><img src="images/s.png" class="cuadrado"><br>
+                <input type="radio" name="q22" value="c"><img src="images/t.png" class="cuadrado"><br>
+                <input type="radio" name="q22" value="d"><img src="images/u.png" class="cuadrado"><br>
+            </div>
 
-        <div class="pregunta">
-            <p>Complete la siguiente serie: casa, cena, cigüeña,….</p>
-            <input type="radio" name="q25" value="a">mueble<br>
-            <input type="radio" name="q25" value="b">cocina<br>
-            <input type="radio" name="q25" value="c">camino<br>
-            <input type="radio" name="q25" value="d">microondas<br>
-        </div>
+            <div class="pregunta">
+                <p>Para ganar una cocina de inducción en un programa de televisión, un participante deberá completar una
+                    contraseña compuesta por 5 elementos. En la pantalla se muestran sus 4 primeros
+                    elementos:<br>diámetro,
+                    hectárea, lustro, ocaso,</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña<br>
+                <input type="radio" name="q23" value="a">sobreviviente<br>
+                <input type="radio" name="q23" value="b">ubicación<br>
+                <input type="radio" name="q23" value="c">temporal<br>
+                <input type="radio" name="q23" value="d">retorna<br>
+            </div>
+            <div class="pregunta">
+                <p>Jeanneth requiere completar la siguiente gráfica</p>
+                <img src="images/v.png" alt="pizzas"><br>
+                Aplicando los criterios de identificación de patrones, seleccione la opción que completará la
+                secuencia.<br>Seleccione una:<br>
+                <input type="radio" name="q24" value="a"><img src="images/w.png" class="cuadrado"><br>
+                <input type="radio" name="q24" value="b"><img src="images/x.png" class="cuadrado"><br>
+                <input type="radio" name="q24" value="c"><img src="images/y.png" class="cuadrado"><br>
+                <input type="radio" name="q24" value="d"><img src="images/z.png" class="cuadrado"><br>
+            </div>
 
-        <div class="pregunta">
-            <p>Debido a la emergencia energética nacional, una empresa exportadora de banano adquiere un generador de
-                energía eléctrica. Para operarlo, es necesario completar una clave compuesta por 7 elementos. En el
-                monitor se muestran sus 6 primeros<br>1895, 1891. 1883, 1867, 1835, 1771</p>
-            Aplicando los criterios de series numéricas, seleccione el séptima elemento que completará la clave:<br>
-            <input type="radio" name="q26" value="a">1643<br>
-            <input type="radio" name="q26" value="b">1642<br>
-            <input type="radio" name="q26" value="c">1641<br>
-            <input type="radio" name="q26" value="d">1644<br>
-        </div>
+            <div class="pregunta">
+                <p>Complete la siguiente serie: casa, cena, cigüeña,….</p>
+                <input type="radio" name="q25" value="a">mueble<br>
+                <input type="radio" name="q25" value="b">cocina<br>
+                <input type="radio" name="q25" value="c">camino<br>
+                <input type="radio" name="q25" value="d">microondas<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Para descargar un formulario de declaración de impuestos un usuario debe completar una contraseña
-                compuesta por 5 elementos. El monitor muestra sus 4 primeros<br>ufano, ogro, ilustre. empatía,</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña:<br>
-            <input type="radio" name="q27" value="a">agropecuaria<br>
-            <input type="radio" name="q27" value="b">halago<br>
-            <input type="radio" name="q27" value="c">batidora<br>
-            <input type="radio" name="q27" value="d">camión<br>
-        </div>
+            <div class="pregunta">
+                <p>Debido a la emergencia energética nacional, una empresa exportadora de banano adquiere un generador
+                    de
+                    energía eléctrica. Para operarlo, es necesario completar una clave compuesta por 7 elementos. En el
+                    monitor se muestran sus 6 primeros<br>1895, 1891. 1883, 1867, 1835, 1771</p>
+                Aplicando los criterios de series numéricas, seleccione el séptima elemento que completará la clave:<br>
+                <input type="radio" name="q26" value="a">1643<br>
+                <input type="radio" name="q26" value="b">1642<br>
+                <input type="radio" name="q26" value="c">1641<br>
+                <input type="radio" name="q26" value="d">1644<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Un estudiante de economía llega a la conclusión de que, el valor de su computador se ha devaluado en los
-                cinco primeros años, como se muestra a continuación,<br>913, 888, 838, 763, 663,</p>
-            Aplicando los criterios de series numéricas, seleccione el valor que tendrán su computador al sexto año de
-            haberlo adquirido.<br>
-            <input type="radio" name="q28" value="a">538<br>
-            <input type="radio" name="q28" value="b">533<br>
-            <input type="radio" name="q28" value="c">548<br>
-            <input type="radio" name="q28" value="d">543<br>
-        </div>
+            <div class="pregunta">
+                <p>Para descargar un formulario de declaración de impuestos un usuario debe completar una contraseña
+                    compuesta por 5 elementos. El monitor muestra sus 4 primeros<br>ufano, ogro, ilustre. empatía,</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña:<br>
+                <input type="radio" name="q27" value="a">agropecuaria<br>
+                <input type="radio" name="q27" value="b">halago<br>
+                <input type="radio" name="q27" value="c">batidora<br>
+                <input type="radio" name="q27" value="d">camión<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Mishelle requiere completar la siguiente gráfica</p>
-            <img src="images/a1.png" alt="pregunta 29"><br>
-            Aplicando los criterios de identificación de patrones, seleccione la opción que completará la secuencia:<br>
-            <input type="radio" name="q29" value="a"><img src="images/a2.png" class="cuadrado"><br>
-            <input type="radio" name="q29" value="b"><img src="images/a3.png" class="cuadrado"><br>
-            <input type="radio" name="q29" value="c"><img src="images/a4.png" class="cuadrado"><br>
-            <input type="radio" name="q29" value="d"><img src="images/a5.png" class="cuadrado"><br>
-        </div>
+            <div class="pregunta">
+                <p>Un estudiante de economía llega a la conclusión de que, el valor de su computador se ha devaluado en
+                    los
+                    cinco primeros años, como se muestra a continuación,<br>913, 888, 838, 763, 663,</p>
+                Aplicando los criterios de series numéricas, seleccione el valor que tendrán su computador al sexto año
+                de
+                haberlo adquirido.<br>
+                <input type="radio" name="q28" value="a">538<br>
+                <input type="radio" name="q28" value="b">533<br>
+                <input type="radio" name="q28" value="c">548<br>
+                <input type="radio" name="q28" value="d">543<br>
+            </div>
 
-        <div class="pregunta">
-            <p>Debido a que los linces se hallan en peligro de extinción, una institución dedicada a la conservación de
-                especies indica que, al incluir al lince en un programa de protección su cantidad incrementará en los
-                cinco primeros años como se muestra a continuación.<br>444, 569, 819 1194, 1694,</p>
-            Aplicando los criterios de series numéricas, seleccione el número de linces que se esperaría tener al sexto
-            año de haberlo incluido en un programa de protección:<br>
-            <input type="radio" name="q30" value="a">2319<br>
-            <input type="radio" name="q30" value="b">2119<br>
-            <input type="radio" name="q30" value="c">2229<br>
-            <input type="radio" name="q30" value="d">2419<br>
-        </div>
-        <!--PREGUNTA 31 EN ADELANTE-->
-        <div class="pregunta">
-            <p>Debido a la emergencia eléctrica nacional, un transformador de la Empresa Eléctrica Quito sufre un daño a
-                causa de la variación de voltaje. El jefe de mantenimiento debe reiniciar la secuencia de suministro en
-                la red de una parroquia, y para lograrlo debe completar una contraseña compuesta por 5 elementos El
-                monitor de la sala de control muestra a los 4 primeros<br>zambo, verdura, rotación, ñacundá</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña:<br>
-            <input type="radio" name="q31" value="a">kilogramo<br>
-            <input type="radio" name="q31" value="b">madrina<br>
-            <input type="radio" name="q31" value="c">jornada<br>
-            <input type="radio" name="q31" value="d">locura<br>
-        </div>
+            <div class="pregunta">
+                <p>Mishelle requiere completar la siguiente gráfica</p>
+                <img src="images/a1.png" alt="pregunta 29"><br>
+                Aplicando los criterios de identificación de patrones, seleccione la opción que completará la
+                secuencia:<br>
+                <input type="radio" name="q29" value="a"><img src="images/a2.png" class="cuadrado"><br>
+                <input type="radio" name="q29" value="b"><img src="images/a3.png" class="cuadrado"><br>
+                <input type="radio" name="q29" value="c"><img src="images/a4.png" class="cuadrado"><br>
+                <input type="radio" name="q29" value="d"><img src="images/a5.png" class="cuadrado"><br>
+            </div>
 
-        <div class="pregunta">
-            <p>Complete la siguiente serie: maíz, mesa, migraña, montaña,____</p>
-            <input type="radio" name="q32" value="a">mueble<br>
-            <input type="radio" name="q32" value="b">cocina<br>
-            <input type="radio" name="q32" value="c">camino<br>
-            <input type="radio" name="q32" value="d">microondas<br>
-        </div>
-        <div class="pregunta">
-            <p>Debido al incremento del costo de la energia eléctrica, una fábrica ha visto reducido sus ingresos
-                mensualmente como se muestra a continuación:<br>85 754, 85 454, 84 854, 83 954, 82 754</p>
-            Aplicando los criterios de series numéricas, seleccione los ingresos que se proyectaria tener al sexto
-            mes.<br>
-            <input type="radio" name="q33" value="a">81254<br>
-            <input type="radio" name="q33" value="b">80 954<br>
-            <input type="radio" name="q33" value="c">81245<br>
-            <input type="radio" name="q33" value="d">80 964<br>
-        </div>
-        <div class="pregunta">
-            <p>En una plataforma petrolera en el cantón Shushufindi, una máquina extractora de crudo sufre una averia
-                por fatiga Una vez reparada, se requiere ingresar una clave de reinicio compuesta por 7 elementos. En el
-                monitor se muestran 6 de ellos<br>412, 424, 448. 484, 532, 592</p>
-            Aplicando los criterios de series numéricas, seleccione el séptimo elemento que completará la clave de
-            reinicio<br>
-            <input type="radio" name="q34" value="a">664<br>
-            <input type="radio" name="q34" value="b">666<br>
-            <input type="radio" name="q34" value="c">662<br>
-            <input type="radio" name="q34" value="d">660<br>
-        </div>
-        <div class="pregunta">
-            <p>Un escritor de libros técnicos, busca conocer las cinco palabras más empleadas en su último libro. El
-                software especializado de redacción muestra una lista solamente con las cuatro primeras, como se muestra
-                a continuación:<br>Revisar, observar, medir, juntar,</p>
-            Aplicando los criterios de series verbales, seleccione la quinta palabra más utilizado en la redacción del
-            libro<br>
-            <input type="radio" name="q35" value="a">generar<br>
-            <input type="radio" name="q35" value="b">destacar<br>
-            <input type="radio" name="q35" value="c">hervir<br>
-            <input type="radio" name="q35" value="d">formar<br>
-        </div>
-        <div class="pregunta">
-            <p>En un frigorífico, el termostato del cuarto frio sufre una avería y es necesario restaurar sus
-                condiciones de fábrica. El líder de mantenimiento debe reiniciar el aparato completando una contraseña
-                compuesta por 5 elementos. En la pantalla se muestran sus 4 primeros elementos<br>abandonar, funeral,
-                Karina, ornitorrinco,</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña:<br>
-            <input type="radio" name="q36" value="a">tornado<br>
-            <input type="radio" name="q36" value="b">unidad<br>
-            <input type="radio" name="q36" value="c">Riobamba<br>
-            <input type="radio" name="q36" value="d">sarcasmo<br>
-        </div>
-        <div class="pregunta">
-            <p>Para reactivar una secuencia de lanzamiento de un satélite, un ingeniero debe completar una contraseña
-                compuesta por 5 elementos. En el monitor se muestran sus 4 primeros<br>atardecer, eclesiástico,
-                intensidad, ortogonal,</p>
-            Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la contraseña<br>
-            <input type="radio" name="q37" value="a">ultrasonido<br>
-            <input type="radio" name="q37" value="b">hurtado<br>
-            <input type="radio" name="q37" value="c">fulminante<br>
-            <input type="radio" name="q37" value="d">cubo<br>
-        </div>
-        <div class="pregunta">
-            <p>En un estudio de la fauna salvaje se determinó que, debido a la contaminación ambiental, el número de
-                peces corados dentro de un lago se ha ido reduciendo mensualmente como se muestra a
-                continuación<br>1457, 1454, 1445, 1418, 1337</p>
-            Aplicando los criterios de series numéricas, seleccione el número de peces que se esperaría tener al sexto
-            mes, si no se toma acciones sobre la contaminación ambiental<br>
-            <input type="radio" name="q38" value="a">1094<br>
-            <input type="radio" name="q38" value="b">1095<br>
-            <input type="radio" name="q38" value="c">1096<br>
-            <input type="radio" name="q38" value="d">1093<br>
-        </div>
-        <div class="pregunta">
-            <p>Pamela requiere completar la siguiente gráfica</p>
-            <img src="images/a6.png"><br>
-            Aplicando los criterios de identificación de patrones, seleccione la opción que completará la secuencia:<br>
-            <input type="radio" name="q39" value="a"><img src="images/a7.png" class="cuadrado"><br>
-            <input type="radio" name="q39" value="b"><img src="images/a8.png" class="cuadrado"><br>
-            <input type="radio" name="q39" value="c"><img src="images/a9.png" class="cuadrado"><br>
-            <input type="radio" name="q39" value="d"><img src="images/b1.png" class="cuadrado"><br>
-        </div>
-        <div class="pregunta">
-            <p>Un sistema contra incendios sufre una avería a causa de una variación de voltaje. El manual de operación
-                y mantenimiento del sistema recomienda el reinicio del mismo, y para ello, se requiere completar una
-                contraseña compuesta por 7 elementos. En la pantalla se muestran sus 6 primeros<br>3176, 3 168, 3 152, 3
-                128, 3096, 3056</p>
-            Aplicando los criterios de series numéricas, seleccione el séptimo elemento que completará la
-            contraseña:<br>
-            <input type="radio" name="q40" value="a">3.008<br>
-            <input type="radio" name="q40" value="b">3000<br>
-            <input type="radio" name="q40" value="c">3010<br>
-            <input type="radio" name="q40" value="d">3.004<br>
-        </div>
-        <div class="pregunta">
-            <p>Los padres de Pamela deciden regalarle una camioneta por motivo de su graduación. La camioneta está
-                valuada en $35 000. Pamela sólo quiere tener el vehículo por un periodo de dos años. Se conoce que la
-                depreciación anual es del 5%. Aplicando conceptos de operaciones matemáticas simples, establezca el
-                valor del vehículo en dos años.</p>
-            <input type="radio" name="q41" value="a">El valor del vehículo será $31 887,50<br>
-            <input type="radio" name="q41" value="b">El valor del vehículo será $31 587,50<br>
-            <input type="radio" name="q41" value="c">El valor del vehículo será $31 757.50<br>
-            <input type="radio" name="q42" value="d">El valor del vehículo será $31 778,50<br>
-        </div>
+            <div class="pregunta">
+                <p>Debido a que los linces se hallan en peligro de extinción, una institución dedicada a la conservación
+                    de
+                    especies indica que, al incluir al lince en un programa de protección su cantidad incrementará en
+                    los
+                    cinco primeros años como se muestra a continuación.<br>444, 569, 819 1194, 1694,</p>
+                Aplicando los criterios de series numéricas, seleccione el número de linces que se esperaría tener al
+                sexto
+                año de haberlo incluido en un programa de protección:<br>
+                <input type="radio" name="q30" value="a">2319<br>
+                <input type="radio" name="q30" value="b">2119<br>
+                <input type="radio" name="q30" value="c">2229<br>
+                <input type="radio" name="q30" value="d">2419<br>
+            </div>
+            <!--PREGUNTA 31 EN ADELANTE-->
+            <div class="pregunta">
+                <p>Debido a la emergencia eléctrica nacional, un transformador de la Empresa Eléctrica Quito sufre un
+                    daño a
+                    causa de la variación de voltaje. El jefe de mantenimiento debe reiniciar la secuencia de suministro
+                    en
+                    la red de una parroquia, y para lograrlo debe completar una contraseña compuesta por 5 elementos El
+                    monitor de la sala de control muestra a los 4 primeros<br>zambo, verdura, rotación, ñacundá</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña:<br>
+                <input type="radio" name="q31" value="a">kilogramo<br>
+                <input type="radio" name="q31" value="b">madrina<br>
+                <input type="radio" name="q31" value="c">jornada<br>
+                <input type="radio" name="q31" value="d">locura<br>
+            </div>
 
-        <!-- Preguntas de q42 a q80 -->
-        <div class="pregunta">
-            <p>Clara hace un retiro de $3 140 del banco, valor que recibe en un total de 150 billetes, entre ellos, 37
-                de $10 y 36 de $50. El monto restante lo obtiene en denominaciones de $5 y $20. Planifique las acciones
-                matemáticas necesarias para calcular la cantidad de billetes de $5 y $20 que Clara recibió</p>
-            <input type="radio" name="q42" value="a">Clara recibió 39 billetes de $5 y 38 billetes de $20<br>
-            <input type="radio" name="q42" value="b">Clara recibió 38 billetes de $5 y 39 billetes de $20<br>
-            <input type="radio" name="q42" value="c">Clara recibió 37 billetes de $5 y 39 billetes de $20<br>
-            <input type="radio" name="q42" value="d">Clara recibió 38 billetes de $5 y 36 billetes de $20<br>
+            <div class="pregunta">
+                <p>Complete la siguiente serie: maíz, mesa, migraña, montaña,____</p>
+                <input type="radio" name="q32" value="a">mueble<br>
+                <input type="radio" name="q32" value="b">cocina<br>
+                <input type="radio" name="q32" value="c">camino<br>
+                <input type="radio" name="q32" value="d">microondas<br>
+            </div>
+            <div class="pregunta">
+                <p>Debido al incremento del costo de la energia eléctrica, una fábrica ha visto reducido sus ingresos
+                    mensualmente como se muestra a continuación:<br>85 754, 85 454, 84 854, 83 954, 82 754</p>
+                Aplicando los criterios de series numéricas, seleccione los ingresos que se proyectaria tener al sexto
+                mes.<br>
+                <input type="radio" name="q33" value="a">81254<br>
+                <input type="radio" name="q33" value="b">80 954<br>
+                <input type="radio" name="q33" value="c">81245<br>
+                <input type="radio" name="q33" value="d">80 964<br>
+            </div>
+            <div class="pregunta">
+                <p>En una plataforma petrolera en el cantón Shushufindi, una máquina extractora de crudo sufre una
+                    averia
+                    por fatiga Una vez reparada, se requiere ingresar una clave de reinicio compuesta por 7 elementos.
+                    En el
+                    monitor se muestran 6 de ellos<br>412, 424, 448. 484, 532, 592</p>
+                Aplicando los criterios de series numéricas, seleccione el séptimo elemento que completará la clave de
+                reinicio<br>
+                <input type="radio" name="q34" value="a">664<br>
+                <input type="radio" name="q34" value="b">666<br>
+                <input type="radio" name="q34" value="c">662<br>
+                <input type="radio" name="q34" value="d">660<br>
+            </div>
+            <div class="pregunta">
+                <p>Un escritor de libros técnicos, busca conocer las cinco palabras más empleadas en su último libro. El
+                    software especializado de redacción muestra una lista solamente con las cuatro primeras, como se
+                    muestra
+                    a continuación:<br>Revisar, observar, medir, juntar,</p>
+                Aplicando los criterios de series verbales, seleccione la quinta palabra más utilizado en la redacción
+                del
+                libro<br>
+                <input type="radio" name="q35" value="a">generar<br>
+                <input type="radio" name="q35" value="b">destacar<br>
+                <input type="radio" name="q35" value="c">hervir<br>
+                <input type="radio" name="q35" value="d">formar<br>
+            </div>
+            <div class="pregunta">
+                <p>En un frigorífico, el termostato del cuarto frio sufre una avería y es necesario restaurar sus
+                    condiciones de fábrica. El líder de mantenimiento debe reiniciar el aparato completando una
+                    contraseña
+                    compuesta por 5 elementos. En la pantalla se muestran sus 4 primeros elementos<br>abandonar,
+                    funeral,
+                    Karina, ornitorrinco,</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña:<br>
+                <input type="radio" name="q36" value="a">tornado<br>
+                <input type="radio" name="q36" value="b">unidad<br>
+                <input type="radio" name="q36" value="c">Riobamba<br>
+                <input type="radio" name="q36" value="d">sarcasmo<br>
+            </div>
+            <div class="pregunta">
+                <p>Para reactivar una secuencia de lanzamiento de un satélite, un ingeniero debe completar una
+                    contraseña
+                    compuesta por 5 elementos. En el monitor se muestran sus 4 primeros<br>atardecer, eclesiástico,
+                    intensidad, ortogonal,</p>
+                Aplicando los criterios de series verbales, seleccione el quinto elemento que completará la
+                contraseña<br>
+                <input type="radio" name="q37" value="a">ultrasonido<br>
+                <input type="radio" name="q37" value="b">hurtado<br>
+                <input type="radio" name="q37" value="c">fulminante<br>
+                <input type="radio" name="q37" value="d">cubo<br>
+            </div>
+            <div class="pregunta">
+                <p>En un estudio de la fauna salvaje se determinó que, debido a la contaminación ambiental, el número de
+                    peces corados dentro de un lago se ha ido reduciendo mensualmente como se muestra a
+                    continuación<br>1457, 1454, 1445, 1418, 1337</p>
+                Aplicando los criterios de series numéricas, seleccione el número de peces que se esperaría tener al
+                sexto
+                mes, si no se toma acciones sobre la contaminación ambiental<br>
+                <input type="radio" name="q38" value="a">1094<br>
+                <input type="radio" name="q38" value="b">1095<br>
+                <input type="radio" name="q38" value="c">1096<br>
+                <input type="radio" name="q38" value="d">1093<br>
+            </div>
+            <div class="pregunta">
+                <p>Pamela requiere completar la siguiente gráfica</p>
+                <img src="images/a6.png"><br>
+                Aplicando los criterios de identificación de patrones, seleccione la opción que completará la
+                secuencia:<br>
+                <input type="radio" name="q39" value="a"><img src="images/a7.png" class="cuadrado"><br>
+                <input type="radio" name="q39" value="b"><img src="images/a8.png" class="cuadrado"><br>
+                <input type="radio" name="q39" value="c"><img src="images/a9.png" class="cuadrado"><br>
+                <input type="radio" name="q39" value="d"><img src="images/b1.png" class="cuadrado"><br>
+            </div>
+            <div class="pregunta">
+                <p>Un sistema contra incendios sufre una avería a causa de una variación de voltaje. El manual de
+                    operación
+                    y mantenimiento del sistema recomienda el reinicio del mismo, y para ello, se requiere completar una
+                    contraseña compuesta por 7 elementos. En la pantalla se muestran sus 6 primeros<br>3176, 3 168, 3
+                    152, 3
+                    128, 3096, 3056</p>
+                Aplicando los criterios de series numéricas, seleccione el séptimo elemento que completará la
+                contraseña:<br>
+                <input type="radio" name="q40" value="a">3.008<br>
+                <input type="radio" name="q40" value="b">3000<br>
+                <input type="radio" name="q40" value="c">3010<br>
+                <input type="radio" name="q40" value="d">3.004<br>
+            </div>
+            <div class="pregunta">
+                <p>Los padres de Pamela deciden regalarle una camioneta por motivo de su graduación. La camioneta está
+                    valuada en $35 000. Pamela sólo quiere tener el vehículo por un periodo de dos años. Se conoce que
+                    la
+                    depreciación anual es del 5%. Aplicando conceptos de operaciones matemáticas simples, establezca el
+                    valor del vehículo en dos años.</p>
+                <input type="radio" name="q41" value="a">El valor del vehículo será $31 887,50<br>
+                <input type="radio" name="q41" value="b">El valor del vehículo será $31 587,50<br>
+                <input type="radio" name="q41" value="c">El valor del vehículo será $31 757.50<br>
+                <input type="radio" name="q42" value="d">El valor del vehículo será $31 778,50<br>
+            </div>
+
+            <!-- Preguntas de q42 a q80 -->
+            <div class="pregunta">
+                <p>Clara hace un retiro de $3 140 del banco, valor que recibe en un total de 150 billetes, entre ellos,
+                    37
+                    de $10 y 36 de $50. El monto restante lo obtiene en denominaciones de $5 y $20. Planifique las
+                    acciones
+                    matemáticas necesarias para calcular la cantidad de billetes de $5 y $20 que Clara recibió</p>
+                <input type="radio" name="q42" value="a">Clara recibió 39 billetes de $5 y 38 billetes de $20<br>
+                <input type="radio" name="q42" value="b">Clara recibió 38 billetes de $5 y 39 billetes de $20<br>
+                <input type="radio" name="q42" value="c">Clara recibió 37 billetes de $5 y 39 billetes de $20<br>
+                <input type="radio" name="q42" value="d">Clara recibió 38 billetes de $5 y 36 billetes de $20<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Ximena analiza la obtención de licencias de software para las computadoras de su oficina. El costo
+                    mensual es de $14.25. Adicionalmente se ofrecen planes trimestrales y semestrales por $39.33 y
+                    $75,24
+                    respectivamente Planifique las operaciones matemáticas necesarias para determinar el porcentaje de
+                    ahorro que obtendría si realiza el contrato por trimestre o por semestre</p>
+                <input type="radio" name="q43" value="a">El porcentaje de ahorro es de 12% en el plan semestral y 8% en
+                plan
+                trimestral<br>
+                <input type="radio" name="q43" value="b">El porcentaje de ahorro es de 11% en el plan semestral y 74% en
+                plan trimestral<br>
+                <input type="radio" name="q43" value="c">El porcentaje de ahorro es de 12% en el plan semestral y 6% en
+                plan
+                trimestral<br>
+                <input type="radio" name="q43" value="d">El porcentaje de ahorro es de 11% en el plan semestral y 5% en
+                plan
+                trimestral.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Danilo recibe $1 938.05 por su remuneración del mes de abril. Su tarifa por hora trabajada es de
+                    $12.50.
+                    Además, recibió un bono por $125,56 debido a su buen desempeño. Aplicando conceptos de operaciones
+                    matemáticas básicas determine la cantidad de horas que Danilo trabajó durante ese mes</p>
+                <input type="radio" name="q44" value="a">Danilo trabajó 145 horas durante el mes de abril<br>
+                <input type="radio" name="q44" value="b">Danilo trabajó 154 horas durante el mes de abril<br>
+                <input type="radio" name="q44" value="c">Danilo trabajó 165 horas durante el mes de abril<br>
+                <input type="radio" name="q44" value="d">Danilo trabajó 134 horas durante el mes de abril<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Como director de Talento Humano, Mateo debe revisar los honorarios de los empleados de su empresa.
+                    Solicita reporte donde se encuentran los salarios y bonificaciones de los gerentes departamentales,
+                    donde detecta que et sueldo de Marcia no es el correcto. Corrija el error calculando el monto exacto
+                    de
+                    la remuneración de Marcia</p>
+                <img src="images/b2.png"><br>
+                <input type="radio" name="q45" value="a">La remuneración de Marcia es de $6 064<br>
+                <input type="radio" name="q45" value="b">La remuneración de Marcia es de $6 046<br>
+                <input type="radio" name="q45" value="c">La remuneración de Marcia es de $6 044<br>
+                <input type="radio" name="q45" value="d">La remuneración de Marcia es de $6 066<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Julian muestra a Paulina dos opciones de muebles para su sala. La colección "kino con un precio
+                    normal de
+                    $2 850 y la colección "zino" con un valor de $3 050" Paulina le solicita un descuento y Julián le
+                    indica
+                    poder ofrecerle un 7.20% y un 13,30% respectivamente a cada colección.</p>
+                Aplicando conceptos de operaciones matemáticas simples, seleccione la opción más económica:<br>
+                <input type="radio" name="q46" value="a">La opción más económica es la colección "kino con un valor de
+                $2
+                644,35<br>
+                <input type="radio" name="q46" value="b">La opción más económica es la colección "zino" con un valor de
+                $2
+                644,35.<br>
+                <input type="radio" name="q46" value="c">La opción más económica es la colección "kino" con un valor de
+                $2
+                664.05.<br>
+                <input type="radio" name="q46" value="d">La opción más económica es la colección "zino" con un valor de
+                $2
+                664,05<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Elizabeth desea colocar una cerca para su terreno rectangular que tiene un área de 1 125 metros
+                    cuadrados. Planifique las acciones matemáticas necesarias para determinar el largo del lote,
+                    conociendo
+                    que su ancho es del cuádruple de la longitud disminuido en 8.</p>
+                <input type="radio" name="q47" value="a">El largo del terreno es de 15,80 metros.<br>
+                <input type="radio" name="q47" value="b">El largo del terreno es de 16,80 metros.<br>
+                <input type="radio" name="q47" value="c">El largo del terreno es de 17,80 metros.<br>
+                <input type="radio" name="q47" value="d">El largo del terreno es de 18,80 metros<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Adolfo viaja en un autobús, mientras que su novia Amanda hace un trayecto en su vehículo a 102 km/h
+                    de
+                    forma constante, duplicando así la velocidad a la que viaja Adolfo. Aplicando conceptos matemáticos
+                    básicos, determine número de kilómetros recorridos por Adolfo en 70 minutos.</p>
+                <input type="radio" name="q48" value="a">Adolfo recorre 59,5 kilómetros en 70 minutos.<br>
+                <input type="radio" name="q48" value="b">Adolfo recorre 56,5 kilómetros en 70 minutos.<br>
+                <input type="radio" name="q48" value="c">Adolfo recorre 58,5 kilómetros en 70 minutos.<br>
+                <input type="radio" name="q48" value="d">Adolfo recorre 57,5 kilómetros en 70 minutos<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Jordán tiene tres hijos y desea otorgarles su sueldo de $1 500. Al primer hijo le otorga $250 más que
+                    al
+                    tercer hijo Al segundo hijo le regala $40 menos que al tercer hijo. Planifique las acciones
+                    matemáticas
+                    necesarias para calcular la cantidad que el tercer hijo recibió.</p>
+                <input type="radio" name="q49" value="a">El tercer hijo recibió $330<br>
+                <input type="radio" name="q49" value="b">El tercer hijo recibió $340<br>
+                <input type="radio" name="q49" value="c">El tercer hijo recibió $430.<br>
+                <input type="radio" name="q49" value="d">El tercer hijo recibió $440<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Natalia dispone de 48 horas de estudio para rendir sus exámenes de fin de semestre Según su
+                    planificación
+                    destina una fracción de 3/10 para Biologia. 1/5 para Quimica y 1/10 para Fisiologia, Planifique las
+                    acciones matemáticas necesarias para calcular el número de horas restantes que deberá incluir en su
+                    plan
+                    para estudiar Anatomía</p>
+                <input type="radio" name="q50" value="a">Planifica 19,00 horas para estudiar Anatomia<br>
+                <input type="radio" name="q50" value="b">Planifica 19,30 horas para estudiar Anatomía<br>
+                <input type="radio" name="q50" value="c">Planifica 19,10 horas para estudiar Anatomía<br>
+                <input type="radio" name="q50" value="d">Planifica 19,20 horas para estudiar Anatomia<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Jorge es profesor en un colegio, imparte clases de matemáticas y dibujo. En el mes de enero ofrece
+                    700
+                    clases. El costo por clases de matemáticas es de $5 y el costo por clases de dibujo es de $10. En el
+                    mes
+                    de enero Jorge obtuvo ingresos por $5 500 Planifique las acciones matemáticas necesarias para
+                    calcular
+                    el número de clases de matemáticas y dibujó que ofreció Jorge</p>
+                <input type="radio" name="q51" value="a">Jorge impartió 455 clases de dibujo y 245 clases de
+                matemáticas<br>
+                <input type="radio" name="q51" value="b">Jorge impartió 300 clases de dibujo y 400 clases de
+                matemáticas<br>
+                <input type="radio" name="q51" value="c">Jorge impartió 300 clases de matemáticas y 400 clases de
+                dibujo<br>
+                <input type="radio" name="q51" value="d">Jorge impartió 350 clases de matemáticas y 350 clases de
+                dibujo<br>
+
+            </div>
+
+            <div class="pregunta">
+                <p>Carlota necesita un préstamo de $3 780 a un año plazo para ampliar su oficina El banco EMPRENDE
+                    ofrece
+                    una tasa del 9,70% anual y un incremento de $45.34 por una sola vez debido a un seguro de vida para
+                    el
+                    beneficiario. El banco PROMUEVE plantea una tasa del 10,90% anual sin agregar ningún valor
+                    adicional.
+                    Los dos bancos ofrecen cobrar el monto total al final del plazo. Planifique las acciones matemáticas
+                    necesarias para escoger el banco que represente la mejor opción para obtener el crédito.</p>
+                <input type="radio" name="q52" value="a">La mejor opción es la del banco EMPRENDE por un monto final de
+                $4
+                192,02<br>
+                <input type="radio" name="q52" value="b">La mejor opción es la del banco PROMUEVE por un monto final de
+                $4
+                192.02.<br>
+                <input type="radio" name="q52" value="c">La mejor opción es la del banco EMPRENDE por un monto final de
+                $4
+                192,00.<br>
+                <input type="radio" name="q52" value="d">La mejor opción es la del banco PROMUEVE por un monto final de
+                $4
+                192,00<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Fabiola en su caminata matinal en el parque observa 120 aves, donde existían once veces más palomas
+                    que
+                    colibríes Aplicando conceptos de ecuaciones matemáticas simples, determine la cantidad de colibríes
+                    que
+                    logró avistar Fabiola</p>
+                <input type="radio" name="q53" value="a">Fabiola avistó 13 colibríes en el parque.<br>
+                <input type="radio" name="q53" value="b">Fabiola avistó 12 colibríes en el parque.<br>
+                <input type="radio" name="q53" value="c">Fabiola avistó 11 colibríes en el parque.<br>
+                <input type="radio" name="q53" value="d">Fabiola avistó 10 colibríes en el parque.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Gabriela y Verónica organizan la celebración del día del niño para los empleados de su empresa. Del
+                    total
+                    de 600 invitados asisten el doble de mujeres que niños, así como 5 hombres más que el total de
+                    mujeres
+                    Planifique las acciones matemáticas necesarias para determinar el número de mujeres presentes en la
+                    reunión</p>
+                <input type="radio" name="q54" value="a">268 mujeres están invitadas a la celebración<br>
+                <input type="radio" name="q54" value="b">248 mujeres están invitadas a la celebración<br>
+                <input type="radio" name="q54" value="c">258 mujeres están invitadas a la celebración<br>
+                <input type="radio" name="q54" value="d">238 mujeres están invitadas a la celebración<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Javier recibe su bono de jubilación, cuyo monto es de $24 264. Decide repartirlo entre sus tres
+                    hijos,
+                    quienes recibirán un valor dependiendo de sus edades. Planifique las acciones matemáticas necesarias
+                    para determinar el monto que recibirá Pamela de 36 años, Marcos de 26 y Ramón 18 respectivamente.
+                </p>
+                <input type="radio" name="q55" value="a">Pamela recibirá $10 918,80: Marcos $7 885,80 y Ramón $5
+                459,40<br>
+                <input type="radio" name="q55" value="b">Pamela recibirá $10 918,80, Marcos $7 885,80 y Ramón $5
+                449,40<br>
+                <input type="radio" name="q55" value="c">Pamela recibirá $10 918,80, Marcos $7 858,80 y Ramón $5
+                459,40<br>
+                <input type="radio" name="q55" value="d">Pamela recibirá $10 918,08, Marcos $7 885,80 y Ramón $5
+                459,40<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Angela gestiona la contratación de un servicio de impresión de docurnentos, conociendo que en su
+                    oficina
+                    se genera un promedio de 3 000 hojas mensuales en 8 impresoras. La compañía PRINTCOM le indica que
+                    su
+                    tarifa mensual fija es de $8,75 por impresora y su costo por hoja impresa es de 13,5 centavos de
+                    dólar.
+                    Aplicando nociones matemáticas básicas, seleccione las operaciones que deberá incluir la fórmula
+                    siguiente para determinar el costo mensual por el servicio de impresión:</p>
+                8,75■8■3000 ■0,0135=110,50<br>
+                <input type="radio" name="q56" value="a">La fórmula correcta de cálculo es: 8,75 + 8+3000 x 0,0135 =
+                110,50<br>
+                <input type="radio" name="q56" value="b">La fórmula correcta de cálculo es: 8,75 x 8+3000+0,0135=
+                110,50<br>
+                <input type="radio" name="q56" value="c">La fórmula correcta de cálculo es: 8,75 x 8+3000 × 0,0135 =
+                110,50<br>
+                <input type="radio" name="q56" value="d">La fórmula correcta de cálculo es: 8,75 x 8 x
+                3000+0,0135=110,50<br>
+            </div>
+
+            <div class="pregunta">
+                <p>En su universidad, Milton participa en el campeonato de lanzamiento de martillo junto con su amigo
+                    Felipe. Milton supera con tres metros al lanzamiento de su amigo y entre los dos logran establecer
+                    una
+                    marca de veinte y tres metros en total. Aplicando conceptos de ecuaciones matemáticas básicas,
+                    determine
+                    la cantidad de metros obtuvo Felipe en su lanzamiento.</p>
+                <input type="radio" name="q57" value="a">Felipe logra un lanzamiento de 10 metros.<br>
+                <input type="radio" name="q57" value="b">Felipe logra un lanzamiento de 12 metros<br>
+                <input type="radio" name="q57" value="c">Felipe logra un lanzamiento de 14 metros.<br>
+                <input type="radio" name="q57" value="d">Felipe logra un lanzamiento de 16 metros.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Lisa requiere colocar un cerramiento alrededor de su casa de campo, cuyo terreno rectangular nene una
+                    superficie de 1.416.10 metros cuadrados y la dimensión del frente es de 2.5 veces la medida de
+                    fondo.
+                    Planifique las acciones matemáticas necesarias para establecer las dimensiones del frente y de fondo
+                </p>
+                <input type="radio" name="q58" value="a">El frente mide 59.05 metros y el fondo 23,62 metros.<br>
+                <input type="radio" name="q58" value="b">El frente mide 59,50 metros y el fondo 23,80 metros.<br>
+                <input type="radio" name="q58" value="c">El frente mide 59,00 metros y el fondo 23.60 metros.<br>
+                <input type="radio" name="q58" value="d">El frente mide 59,25 metros y el fondo 23,70 metros<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Pedro tiene un galpón y desea vender las aves que tiene. Conoce que el precio de un gallo y tres
+                    gallinas
+                    es de $45 El precio de cuatro gallos y dos gallinas es de $70. Planifique las acciones matemáticas
+                    necesarias para calcular el precio de una gallina.</p>
+                <input type="radio" name="q59" value="a">El precio de una gallina es de $10.<br>
+                <input type="radio" name="q59" value="b">El precio de una gallina es de $11.<br>
+                <input type="radio" name="q59" value="c">El precio de una gallina es de $12.<br>
+                <input type="radio" name="q59" value="d">El precio de una gallina es de $13.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Maritza es una planeadora de eventos. En el mes de septiembre deberá planificar 8 bodas más que el
+                    número
+                    de bautizos. La cantidad total de eventos que deberá realizar son 76. Aplicando conceptos de
+                    ecuaciones
+                    matemáticas simples, establezca el numero de bodas que Maritza deberá realizar en el mes de
+                    septiembre
+                </p>
+                <input type="radio" name="q60" value="a">Maritza deberá planificar 40 bodas<br>
+                <input type="radio" name="q60" value="b">Maritza deberá planificar 42 bodas<br>
+                <input type="radio" name="q60" value="c">Maritza deberá planificar 44 bodas<br>
+                <input type="radio" name="q60" value="d">Maritza deberá planificar 46 bodas<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Una pareja de esposos decide realizar un viaje en las próximas vacaciones. Alexis está interesado en
+                    recorrer la playa, mientras que. Andrea desea visitar el campo. Al pasar los días, aún están
+                    indecisos
+                    por el lugar destino de sus vacaciones, por lo tanto, deciden realizar el viaje a los dos lugares de
+                    preferencia de la pareja, a pesar de no contar con muchos días de descanso.</p>
+                Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea:<br>
+                <input type="radio" name="q61" value="a">A la tercera va la vencida.<br>
+                <input type="radio" name="q61" value="b">Querer es poder.<br>
+                <input type="radio" name="q61" value="c">Quien mucho abarca, poco aprieta.<br>
+                <input type="radio" name="q61" value="d">No por mucho madrugar amanece más temprano.<br>
+            </div>
+
+            <div class="pregunta">
+                <p> Mishel trabaja en una cadena de farmacias por más de cinco años. Los dueños del establecimiento han
+                    decidido aplicar promociones para sus clientes, una de ellas es la entrega de productos de aseo
+                    personal
+                    por compras superiores a $20 Un día, los propietarios realizan la verificación de la entrega de las
+                    promociones, dándose cuenta de que a muchos clientes no se les entregó el obsequio, sin embargo, en
+                    existencias ya no contaban con dichos productos por consiguiente, Mishel no pudo justificar lo
+                    actuado
+                </p>
+                Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea<br>
+                <input type="radio" name="q62" value="a">El que siembra vientos, recoge tempestades<br>
+                <input type="radio" name="q62" value="b">Cree el ladrón que todos son de su condición.<br>
+                <input type="radio" name="q62" value="c">Más vale prevenir que lamentar<br>
+                <input type="radio" name="q62" value="d">Las cosas, claras, y el chocolate, espeso.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>En una clase de Historia, Fernando les explica a los estudiantes una antigua tribu <b>montaraz</b>
+                    que
+                    habitaba en la zona más profunda del bosque. La principal característica de dicha comunidad fue su
+                    agreste manera de vivir y su resistencia a la influencia externa</p>
+                Aplicando los conceptos relacionados a la palabra marcada en negrita, seleccione el término
+                excluido:<br>
+                <input type="radio" name="q63" value="a">Silvestre<br>
+                <input type="radio" name="q63" value="b">Indomita<br>
+                <input type="radio" name="q63" value="c">Rustico<br>
+                <input type="radio" name="q63" value="d">Afable<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Lorena es una mujer con un carácter particular. Durante mucho tiempo fue víctima de violencia por
+                    parte
+                    de su pareja Ella solla actuar frenéticamente, sin embargo, después de su divorcio, ella ha decidido
+                    superar situaciones traumáticas Su médico le recomienda: acudir a sus terapias, realizar deporte y
+                    dedicar tiempo para si mismo.</p>
+                Aplicando los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea<br>
+                <input type="radio" name="q64" value="a">Un clavo saca a otro clavo<br>
+                <input type="radio" name="q64" value="b">Más vale estar solo que mal acompañado<br>
+                <input type="radio" name="q64" value="c">Ojos que no ven corazón que no siente<br>
+                <input type="radio" name="q64" value="d">Quien siembra vientos, cosecha tempestades.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Miguel trabaja en el servicio de fisioterapia en el hospital de la ciudad, él ha analizado las
+                    oportunidades de crecimiento que podria tener en su trabajo actual, pero, no tiene un panorama
+                    alentador, por lo tanto. Miguel está considerando cambiarse de trabajo y al mismo tiempo emprender
+                    su
+                    negocio propio</p>
+                Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea:<br>
+                <input type="radio" name="q65" value="a">Quien mucho abarca, poco aprieta.<br>
+                <input type="radio" name="q65" value="b">No por mucho madrugar amanece más temprano<br>
+                <input type="radio" name="q65" value="c">Al mal tiempo, buena cara<br>
+                <input type="radio" name="q65" value="d">Más vale prevenir que lamentar<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Un grupo de amigos se encuentran realizando una caminata en el Parque Nacional Cotopaxi. Al darse
+                    cuenta
+                    de las condiciones climáticas, se percatan que se aproxima una nubada, por lo tanto, ellos deciden
+                    <b>guarecer</b> en el lugar más próximo.
+                </p>
+                Aplicando los conceptos relacionados a la palabra marcada en negrita, seleccione el término
+                excluido:<br>
+                <input type="radio" name="q66" value="a">Refugiar<br>
+                <input type="radio" name="q66" value="b">Amparar<br>
+                <input type="radio" name="q66" value="c">Guardar<br>
+                <input type="radio" name="q66" value="d">Contener<br>
+            </div>
+
+            <div class="pregunta">
+                <p>La Literatura, con sus relatos, protagonistas y ambientaciones, no solo reflejan la riqueza cultural
+                    de
+                    una comunidad. sino que, además desempeña un papel fundamental en el enriquecimiento y arraigo de la
+                    identidad cultural de sus integrantes. Desde las historias tradicionales hasta las creaciones más
+                    recientes, la Literatura proporciona acceso a una amplia gama de experiencias y visiones del mundo,
+                    ofreciendo a las personas la oportunidad de sumergirse en su legado cultural y encontrar un sentido
+                    de
+                    pertenencia más profundo.</p>
+                Infiera la información proporcionada<br>
+                <input type="radio" name="q67" value="a">La Literatura es una forma de sumergirse en las historias
+                tradicionales de un pueblo.<br>
+                <input type="radio" name="q67" value="b">La identidad cultural se forma únicamente a través de los
+                relatos
+                que presenta la Literatura.<br>
+                <input type="radio" name="q67" value="c">La Literatura muestra la diversidad cultural y fomenta la
+                identidad
+                cultural.<br>
+                <input type="radio" name="q67" value="d">La identidad cultural se fomenta al encontrar sentido de
+                pertenencia en una sociedad<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Complete la siguiente serie: arma, bocina, cocina, </p>
+                <input type="radio" name="q68" value="a">bobina<br>
+                <input type="radio" name="q68" value="b">turbina<br>
+                <input type="radio" name="q68" value="c">camino<br>
+                <input type="radio" name="q68" value="d">dado<br>
+            </div>
+
+            <div class="pregunta">
+                <p>En un laboratorio de fisica Andrea contribuye en un experimento con sus compañeros de clase. Al
+                    obtener y
+                    registrar los resultados que arrojó el experimento, se percata que la temperatura del reactivo se
+                    encuentra elevada en relación a las métricas consideradas para el proceso, también verifica que la
+                    tasa
+                    de reacción se encuentra en un rango superior</p>
+                Infiera la información proporcionada:<br>
+                <input type="radio" name="q69" value="a">La temperatura del reactivo tiene correlación con la tasa de
+                reacción<br>
+                <input type="radio" name="q69" value="b">Existe una variación entre la temperatura del reactivo y la
+                tasa de
+                reacción<br>
+                <input type="radio" name="q69" value="c">La temperatura del reactivo tiene una relación directa con la
+                tasa
+                de reacción<br>
+                <input type="radio" name="q69" value="d">La temperatura del reactivo y la tasa de reacción muestran
+                cambios.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Una revista científica ha publicado los resultados de un estudio sobre los medios utilizados para
+                    revisar
+                    noticias actuales en un grupo de estudiantes de entre 18 a 25 años Los datos muestran que, gran
+                    parte de
+                    la población accede a noticias compartidas por sus contactos mediante el uso de redes sociales.
+                    mientras
+                    que una proporción menor acude a revisar noticias por medios tradicionales.</p>
+                Infiera la información proporcionada<br>
+                <input type="radio" name="q70" value="a">La mayoría de estudiantes de entre 18 y 25 años desconfía de
+                medios
+                tradicionales.<br>
+                <input type="radio" name="q70" value="b">una pequeña proporción recurre a revisar noticias en medios
+                tradicionales<br>
+                <input type="radio" name="q70" value="c">Las redes sociales son usadas por la mayoría de estudiantes
+                para
+                revisar noticias.<br>
+                <input type="radio" name="q70" value="d">Los estudiantes revisan noticias por redes sociales y medios
+                tradicionales.<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Jorge es el ingeniero responsable del área industrial de una empresa de alimentos En los últimos
+                    meses,
+                    su dependencia ha presentado varios problemas considerables que requieren soluciones inmediatas
+                    antes
+                    que generen daños en la organización Para poder cumplirlo, requiere de un modelo estructural en el
+                    área
+                    de producción</p>
+                Aplique los conceptos relacionados en la siguiente analogía: "ingeniería es a soluciones como es a<br>
+                <input type="radio" name="q71" value="a">Arquitectura – Diseño<br>
+                <input type="radio" name="q71" value="b">Robótica – Automatización<br>
+                <input type="radio" name="q71" value="c">Producción – Producto<br>
+                <input type="radio" name="q71" value="d">Sistemas-Seguridad<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Complete la siguiente serie: camino, elefante, goma,___</p>
+                <input type="radio" name="q72" value="a">tijera<br>
+                <input type="radio" name="q72" value="b">iguana<br>
+                <input type="radio" name="q72" value="c">marcador<br>
+                <input type="radio" name="q72" value="d">oso<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Teresa requiere componer una canción a base de versos. Para ello, su maestro le enseña a tocar
+                    guitarra,
+                    sin embargo Teresa ha encontrado dificultades para identificar los acordes adecuados, ella espera
+                    que su
+                    aprendizaje no se detenga por este problema</p>
+                Aplique los conceptos relacionados en la siguiente analogía: "canción es a como a versos<br>
+                <input type="radio" name="q73" value="a">Letras-comedia<br>
+                <input type="radio" name="q73" value="b">Acordes poema<br>
+                <input type="radio" name="q73" value="c">Ritmo copla<br>
+                <input type="radio" name="q73" value="d">Melodia-artista<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Javier es un fotógrafo de la ciudad que labora en el parque central. Él es reconocido por su
+                    brillante
+                    trabajo al capturar en una imagen, las diversas emociones de sus clientes y combinarlos con el
+                    panorama
+                    céntrico de la zona. Esto se debe a la cámara profesional que adquirió hace dos meses, pues, dicho
+                    objeto se convierte en su herramienta de trabajo</p>
+                Aplique los conceptos relacionados en la siguiente analogía: "fotógrafo es a cámara como "cirujano es
+                a<br>
+                <input type="radio" name="q74" value="a">Bisturí<br>
+                <input type="radio" name="q74" value="b">Bata<br>
+                <input type="radio" name="q74" value="c">Jeringa<br>
+                <input type="radio" name="q74" value="d">Estetoscopio<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Juan es el ejecutivo de cobranzas de un banco. Durante el mes de octubre no ha logrado cumplir la
+                    meta
+                    propuesta por ello, decide aplicar estrategias que le permitan cumplir con su objetivo, una de ellas
+                    es
+                    presentarle a su jefe un informe detallado sobre las actividades que va a desarrollar, en dicho
+                    documento incluye el <b>emolumento</b> para su desarrollo</p>
+                Identifique el sinónimo de la palabra marcada en negrita "emolumento"<br>
+                <input type="radio" name="q75" value="a">Producto<br>
+                <input type="radio" name="q75" value="b">Pillaje<br>
+                <input type="radio" name="q75" value="c">Beneficio<br>
+                <input type="radio" name="q75" value="d">Aumento<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Juan es el ejecutivo de cobranzas de un banco. Durante el mes de octubre no ha logrado cumplir la
+                    <b>meta</b> propuesta por ello, decide aplicar estrategias que le permitan cumplir con su objetivo,
+                    una
+                    de ellas es presentarle a su jefe un informe detallado sobre las actividades que va a desarrollar,
+                    en
+                    dicho documento incluye el <b>emolumento</b> para su desarrollo
+                </p>
+                Identifique el sinónimo de la palabra marcada en negrita "emolumento"<br>
+                <input type="radio" name="q76" value="a">Producto<br>
+                <input type="radio" name="q76" value="b">Pillaje<br>
+                <input type="radio" name="q76" value="c">Beneficio<br>
+                <input type="radio" name="q76" value="d">Objetivo<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Pamela desea adoptar una mascota para compañía en el hogar. Por un lado, José, su amigo de infancia,
+                    le
+                    ofrece un can de raza grande Por otro lado. Emilia, su compañera de clase, le trae un cachorro de
+                    raza
+                    pequeña. Al contar con dos opciones. Pamela analiza varios aspectos, entre ellos, la dificultad por
+                    cuidar, entrenar y controlar a cada una de las razas</p>
+                Infiera la información proporcionada<br>
+                <input type="radio" name="q77" value="a">Las mascotas requieren de cuidados especiales, dependiendo la
+                raza.<br>
+                <input type="radio" name="q77" value="b">Las mascotas se convierten en compañía en los hogares para
+                adultos
+                y niños<br>
+                <input type="radio" name="q77" value="c">Las mascotas requieren dedicación y cuidados,
+                independientemente la
+                raza.<br>
+                <input type="radio" name="q77" value="d">Las mascotas de raza grande y pequeña tienen un comportamiento
+                similar<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Luciano dirige la compañía con excelentes condiciones y recursos financieros en su administración se
+                    observa que rodas los miembros del equipo destacan por su eficiencia y logros. Sin embargo, al
+                    enfrentarse a situaciones adversas Luciano comienza a mostrar carencias en su desempeño, por lo que
+                    los
+                    miembros de la compañía dudan que su liderazgo haya sido verdadero.</p>
+                Aplique los conceptos relacionados al texto compartido, seleccione el refrán que mejor describa al
+                argumento<br>
+                <input type="radio" name="q78" value="a">Camarón que se duerme, se lo lleva la corriente<br>
+                <input type="radio" name="q78" value="b">Cuando llueve y nace sol, deja el perro a su pastor<br>
+                <input type="radio" name="q78" value="c">En buen viento, cualquier velero navega<br>
+                <input type="radio" name="q78" value="d">Cuando el rio sueña, agua lleva<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Raúl es un comerciante de vehículos que trabaja en la ciudad hace 3 años. Sus clientes lo reconocen
+                    como
+                    un vendedor legal y justo en las transacciones que ha realizado. Un dia, en la feria de autos, Raúl
+                    se
+                    interesa en un carro por su aparente cuidado y precio, sin embargo, al revisar los documentos,
+                    identifican <b>espurio</b> en un certificado, lo que genera duda e interés por el estado del
+                    vehículo
+                </p>
+                Identifique el sinónimo de la palabra marcada en negrita: "espurio"<br>
+                <input type="radio" name="q79" value="a">Decoro<br>
+                <input type="radio" name="q79" value="b">Falseado<br>
+                <input type="radio" name="q79" value="c">Yerro<br>
+                <input type="radio" name="q79" value="d">Pifia<br>
+            </div>
+
+            <div class="pregunta">
+                <p>Dayana trabaja en una empresa de alimentos de consumo masivo que es líder en la zona centro, La
+                    empresa
+                    aplica canales de distribución eficientes para mantener un adecuado abastecimiento en todos los
+                    puntos
+                    de venta Dayana aprovecha la disponibilidad de productos para generar el nivel de ventas requerido,
+                    utilizando estrategias que incluyan beneficios a los clientes</p>
+                Aplique los conceptos relacionados en la siguiente analogía: "logística es a distribución como
+                “--------- es a -------------“<br>
+                <input type="radio" name="q80" value="a">Mercadotecnia es a promoción.<br>
+                <input type="radio" name="q80" value="b">Ventas es a dinero<br>
+                <input type="radio" name="q80" value="c">Marketing es a publicidad<br>
+                <input type="radio" name="q80" value="d">Mercadeo es a producto<br>
+            </div>
+
+            <button id="prevButton" onclick="preguntaAnterior()" disabled>Anterior</button>
+            <button id="nextButton" onclick="siguientePregunta()">Siguiente</button>
+            <h3 id="resultado"></h3>
+            <h3 id="puntaje"></h3>
+            <div id="detalleResultados"></div>
         </div>
-
-        <div class="pregunta">
-            <p>Ximena analiza la obtención de licencias de software para las computadoras de su oficina. El costo
-                mensual es de $14.25. Adicionalmente se ofrecen planes trimestrales y semestrales por $39.33 y $75,24
-                respectivamente Planifique las operaciones matemáticas necesarias para determinar el porcentaje de
-                ahorro que obtendría si realiza el contrato por trimestre o por semestre</p>
-            <input type="radio" name="q43" value="a">El porcentaje de ahorro es de 12% en el plan semestral y 8% en plan
-            trimestral<br>
-            <input type="radio" name="q43" value="b">El porcentaje de ahorro es de 11% en el plan semestral y 74% en
-            plan trimestral<br>
-            <input type="radio" name="q43" value="c">El porcentaje de ahorro es de 12% en el plan semestral y 6% en plan
-            trimestral<br>
-            <input type="radio" name="q43" value="d">El porcentaje de ahorro es de 11% en el plan semestral y 5% en plan
-            trimestral.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Danilo recibe $1 938.05 por su remuneración del mes de abril. Su tarifa por hora trabajada es de $12.50.
-                Además, recibió un bono por $125,56 debido a su buen desempeño. Aplicando conceptos de operaciones
-                matemáticas básicas determine la cantidad de horas que Danilo trabajó durante ese mes</p>
-            <input type="radio" name="q44" value="a">Danilo trabajó 145 horas durante el mes de abril<br>
-            <input type="radio" name="q44" value="b">Danilo trabajó 154 horas durante el mes de abril<br>
-            <input type="radio" name="q44" value="c">Danilo trabajó 165 horas durante el mes de abril<br>
-            <input type="radio" name="q44" value="d">Danilo trabajó 134 horas durante el mes de abril<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Como director de Talento Humano, Mateo debe revisar los honorarios de los empleados de su empresa.
-                Solicita reporte donde se encuentran los salarios y bonificaciones de los gerentes departamentales,
-                donde detecta que et sueldo de Marcia no es el correcto. Corrija el error calculando el monto exacto de
-                la remuneración de Marcia</p>
-            <img src="images/b2.png"><br>
-            <input type="radio" name="q45" value="a">La remuneración de Marcia es de $6 064<br>
-            <input type="radio" name="q45" value="b">La remuneración de Marcia es de $6 046<br>
-            <input type="radio" name="q45" value="c">La remuneración de Marcia es de $6 044<br>
-            <input type="radio" name="q45" value="d">La remuneración de Marcia es de $6 066<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Julian muestra a Paulina dos opciones de muebles para su sala. La colección "kino con un precio normal de
-                $2 850 y la colección "zino" con un valor de $3 050" Paulina le solicita un descuento y Julián le indica
-                poder ofrecerle un 7.20% y un 13,30% respectivamente a cada colección.</p>
-            Aplicando conceptos de operaciones matemáticas simples, seleccione la opción más económica:<br>
-            <input type="radio" name="q46" value="a">La opción más económica es la colección "kino con un valor de $2
-            644,35<br>
-            <input type="radio" name="q46" value="b">La opción más económica es la colección "zino" con un valor de $2
-            644,35.<br>
-            <input type="radio" name="q46" value="c">La opción más económica es la colección "kino" con un valor de $2
-            664.05.<br>
-            <input type="radio" name="q46" value="d">La opción más económica es la colección "zino" con un valor de $2
-            664,05<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Elizabeth desea colocar una cerca para su terreno rectangular que tiene un área de 1 125 metros
-                cuadrados. Planifique las acciones matemáticas necesarias para determinar el largo del lote, conociendo
-                que su ancho es del cuádruple de la longitud disminuido en 8.</p>
-            <input type="radio" name="q47" value="a">El largo del terreno es de 15,80 metros.<br>
-            <input type="radio" name="q47" value="b">El largo del terreno es de 16,80 metros.<br>
-            <input type="radio" name="q47" value="c">El largo del terreno es de 17,80 metros.<br>
-            <input type="radio" name="q47" value="d">El largo del terreno es de 18,80 metros<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Adolfo viaja en un autobús, mientras que su novia Amanda hace un trayecto en su vehículo a 102 km/h de
-                forma constante, duplicando así la velocidad a la que viaja Adolfo. Aplicando conceptos matemáticos
-                básicos, determine número de kilómetros recorridos por Adolfo en 70 minutos.</p>
-            <input type="radio" name="q48" value="a">Adolfo recorre 59,5 kilómetros en 70 minutos.<br>
-            <input type="radio" name="q48" value="b">Adolfo recorre 56,5 kilómetros en 70 minutos.<br>
-            <input type="radio" name="q48" value="c">Adolfo recorre 58,5 kilómetros en 70 minutos.<br>
-            <input type="radio" name="q48" value="d">Adolfo recorre 57,5 kilómetros en 70 minutos<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Jordán tiene tres hijos y desea otorgarles su sueldo de $1 500. Al primer hijo le otorga $250 más que al
-                tercer hijo Al segundo hijo le regala $40 menos que al tercer hijo. Planifique las acciones matemáticas
-                necesarias para calcular la cantidad que el tercer hijo recibió.</p>
-            <input type="radio" name="q49" value="a">El tercer hijo recibió $330<br>
-            <input type="radio" name="q49" value="b">El tercer hijo recibió $340<br>
-            <input type="radio" name="q49" value="c">El tercer hijo recibió $430.<br>
-            <input type="radio" name="q49" value="d">El tercer hijo recibió $440<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Natalia dispone de 48 horas de estudio para rendir sus exámenes de fin de semestre Según su planificación
-                destina una fracción de 3/10 para Biologia. 1/5 para Quimica y 1/10 para Fisiologia, Planifique las
-                acciones matemáticas necesarias para calcular el número de horas restantes que deberá incluir en su plan
-                para estudiar Anatomía</p>
-            <input type="radio" name="q50" value="a">Planifica 19,00 horas para estudiar Anatomia<br>
-            <input type="radio" name="q50" value="b">Planifica 19,30 horas para estudiar Anatomía<br>
-            <input type="radio" name="q50" value="c">Planifica 19,10 horas para estudiar Anatomía<br>
-            <input type="radio" name="q50" value="d">Planifica 19,20 horas para estudiar Anatomia<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Jorge es profesor en un colegio, imparte clases de matemáticas y dibujo. En el mes de enero ofrece 700
-                clases. El costo por clases de matemáticas es de $5 y el costo por clases de dibujo es de $10. En el mes
-                de enero Jorge obtuvo ingresos por $5 500 Planifique las acciones matemáticas necesarias para calcular
-                el número de clases de matemáticas y dibujó que ofreció Jorge</p>
-            <input type="radio" name="q51" value="a">Jorge impartió 455 clases de dibujo y 245 clases de matemáticas<br>
-            <input type="radio" name="q51" value="b">Jorge impartió 300 clases de dibujo y 400 clases de matemáticas<br>
-            <input type="radio" name="q51" value="c">Jorge impartió 300 clases de matemáticas y 400 clases de dibujo<br>
-            <input type="radio" name="q51" value="d">Jorge impartió 350 clases de matemáticas y 350 clases de dibujo<br>
-
-        </div>
-
-        <div class="pregunta">
-            <p>Carlota necesita un préstamo de $3 780 a un año plazo para ampliar su oficina El banco EMPRENDE ofrece
-                una tasa del 9,70% anual y un incremento de $45.34 por una sola vez debido a un seguro de vida para el
-                beneficiario. El banco PROMUEVE plantea una tasa del 10,90% anual sin agregar ningún valor adicional.
-                Los dos bancos ofrecen cobrar el monto total al final del plazo. Planifique las acciones matemáticas
-                necesarias para escoger el banco que represente la mejor opción para obtener el crédito.</p>
-            <input type="radio" name="q52" value="a">La mejor opción es la del banco EMPRENDE por un monto final de $4
-            192,02<br>
-            <input type="radio" name="q52" value="b">La mejor opción es la del banco PROMUEVE por un monto final de $4
-            192.02.<br>
-            <input type="radio" name="q52" value="c">La mejor opción es la del banco EMPRENDE por un monto final de $4
-            192,00.<br>
-            <input type="radio" name="q52" value="d">La mejor opción es la del banco PROMUEVE por un monto final de $4
-            192,00<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Fabiola en su caminata matinal en el parque observa 120 aves, donde existían once veces más palomas que
-                colibríes Aplicando conceptos de ecuaciones matemáticas simples, determine la cantidad de colibríes que
-                logró avistar Fabiola</p>
-            <input type="radio" name="q53" value="a">Fabiola avistó 13 colibríes en el parque.<br>
-            <input type="radio" name="q53" value="b">Fabiola avistó 12 colibríes en el parque.<br>
-            <input type="radio" name="q53" value="c">Fabiola avistó 11 colibríes en el parque.<br>
-            <input type="radio" name="q53" value="d">Fabiola avistó 10 colibríes en el parque.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Gabriela y Verónica organizan la celebración del día del niño para los empleados de su empresa. Del total
-                de 600 invitados asisten el doble de mujeres que niños, así como 5 hombres más que el total de mujeres
-                Planifique las acciones matemáticas necesarias para determinar el número de mujeres presentes en la
-                reunión</p>
-            <input type="radio" name="q54" value="a">268 mujeres están invitadas a la celebración<br>
-            <input type="radio" name="q54" value="b">248 mujeres están invitadas a la celebración<br>
-            <input type="radio" name="q54" value="c">258 mujeres están invitadas a la celebración<br>
-            <input type="radio" name="q54" value="d">238 mujeres están invitadas a la celebración<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Javier recibe su bono de jubilación, cuyo monto es de $24 264. Decide repartirlo entre sus tres hijos,
-                quienes recibirán un valor dependiendo de sus edades. Planifique las acciones matemáticas necesarias
-                para determinar el monto que recibirá Pamela de 36 años, Marcos de 26 y Ramón 18 respectivamente.</p>
-            <input type="radio" name="q55" value="a">Pamela recibirá $10 918,80: Marcos $7 885,80 y Ramón $5 459,40<br>
-            <input type="radio" name="q55" value="b">Pamela recibirá $10 918,80, Marcos $7 885,80 y Ramón $5 449,40<br>
-            <input type="radio" name="q55" value="c">Pamela recibirá $10 918,80, Marcos $7 858,80 y Ramón $5 459,40<br>
-            <input type="radio" name="q55" value="d">Pamela recibirá $10 918,08, Marcos $7 885,80 y Ramón $5 459,40<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Angela gestiona la contratación de un servicio de impresión de docurnentos, conociendo que en su oficina
-                se genera un promedio de 3 000 hojas mensuales en 8 impresoras. La compañía PRINTCOM le indica que su
-                tarifa mensual fija es de $8,75 por impresora y su costo por hoja impresa es de 13,5 centavos de dólar.
-                Aplicando nociones matemáticas básicas, seleccione las operaciones que deberá incluir la fórmula
-                siguiente para determinar el costo mensual por el servicio de impresión:</p>
-            8,75■8■3000 ■0,0135=110,50<br>
-            <input type="radio" name="q56" value="a">La fórmula correcta de cálculo es: 8,75 + 8+3000 x 0,0135 = 110,50<br>
-            <input type="radio" name="q56" value="b">La fórmula correcta de cálculo es: 8,75 x 8+3000+0,0135= 110,50<br>
-            <input type="radio" name="q56" value="c">La fórmula correcta de cálculo es: 8,75 x 8+3000 × 0,0135 = 110,50<br>
-            <input type="radio" name="q56" value="d">La fórmula correcta de cálculo es: 8,75 x 8 x 3000+0,0135=110,50<br>
-        </div>
-
-        <div class="pregunta">
-            <p>En su universidad, Milton participa en el campeonato de lanzamiento de martillo junto con su amigo
-                Felipe. Milton supera con tres metros al lanzamiento de su amigo y entre los dos logran establecer una
-                marca de veinte y tres metros en total. Aplicando conceptos de ecuaciones matemáticas básicas, determine
-                la cantidad de metros obtuvo Felipe en su lanzamiento.</p>
-            <input type="radio" name="q57" value="a">Felipe logra un lanzamiento de 10 metros.<br>
-            <input type="radio" name="q57" value="b">Felipe logra un lanzamiento de 12 metros<br>
-            <input type="radio" name="q57" value="c">Felipe logra un lanzamiento de 14 metros.<br>
-            <input type="radio" name="q57" value="d">Felipe logra un lanzamiento de 16 metros.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Lisa requiere colocar un cerramiento alrededor de su casa de campo, cuyo terreno rectangular nene una
-                superficie de 1.416.10 metros cuadrados y la dimensión del frente es de 2.5 veces la medida de fondo.
-                Planifique las acciones matemáticas necesarias para establecer las dimensiones del frente y de fondo</p>
-            <input type="radio" name="q58" value="a">El frente mide 59.05 metros y el fondo 23,62 metros.<br>
-            <input type="radio" name="q58" value="b">El frente mide 59,50 metros y el fondo 23,80 metros.<br>
-            <input type="radio" name="q58" value="c">El frente mide 59,00 metros y el fondo 23.60 metros.<br>
-            <input type="radio" name="q58" value="d">El frente mide 59,25 metros y el fondo 23,70 metros<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Pedro tiene un galpón y desea vender las aves que tiene. Conoce que el precio de un gallo y tres gallinas
-                es de $45 El precio de cuatro gallos y dos gallinas es de $70. Planifique las acciones matemáticas
-                necesarias para calcular el precio de una gallina.</p>
-            <input type="radio" name="q59" value="a">El precio de una gallina es de $10.<br>
-            <input type="radio" name="q59" value="b">El precio de una gallina es de $11.<br>
-            <input type="radio" name="q59" value="c">El precio de una gallina es de $12.<br>
-            <input type="radio" name="q59" value="d">El precio de una gallina es de $13.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Maritza es una planeadora de eventos. En el mes de septiembre deberá planificar 8 bodas más que el número
-                de bautizos. La cantidad total de eventos que deberá realizar son 76. Aplicando conceptos de ecuaciones
-                matemáticas simples, establezca el numero de bodas que Maritza deberá realizar en el mes de septiembre
-            </p>
-            <input type="radio" name="q60" value="a">Maritza deberá planificar 40 bodas<br>
-            <input type="radio" name="q60" value="b">Maritza deberá planificar 42 bodas<br>
-            <input type="radio" name="q60" value="c">Maritza deberá planificar 44 bodas<br>
-            <input type="radio" name="q60" value="d">Maritza deberá planificar 46 bodas<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Una pareja de esposos decide realizar un viaje en las próximas vacaciones. Alexis está interesado en
-                recorrer la playa, mientras que. Andrea desea visitar el campo. Al pasar los días, aún están indecisos
-                por el lugar destino de sus vacaciones, por lo tanto, deciden realizar el viaje a los dos lugares de
-                preferencia de la pareja, a pesar de no contar con muchos días de descanso.</p>
-            Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea:<br>
-            <input type="radio" name="q61" value="a">A la tercera va la vencida.<br>
-            <input type="radio" name="q61" value="b">Querer es poder.<br>
-            <input type="radio" name="q61" value="c">Quien mucho abarca, poco aprieta.<br>
-            <input type="radio" name="q61" value="d">No por mucho madrugar amanece más temprano.<br>
-        </div>
-
-        <div class="pregunta">
-            <p> Mishel trabaja en una cadena de farmacias por más de cinco años. Los dueños del establecimiento han
-                decidido aplicar promociones para sus clientes, una de ellas es la entrega de productos de aseo personal
-                por compras superiores a $20 Un día, los propietarios realizan la verificación de la entrega de las
-                promociones, dándose cuenta de que a muchos clientes no se les entregó el obsequio, sin embargo, en
-                existencias ya no contaban con dichos productos por consiguiente, Mishel no pudo justificar lo actuado
-            </p>
-            Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea<br>
-            <input type="radio" name="q62" value="a">El que siembra vientos, recoge tempestades<br>
-            <input type="radio" name="q62" value="b">Cree el ladrón que todos son de su condición.<br>
-            <input type="radio" name="q62" value="c">Más vale prevenir que lamentar<br>
-            <input type="radio" name="q62" value="d">Las cosas, claras, y el chocolate, espeso.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>En una clase de Historia, Fernando les explica a los estudiantes una antigua tribu <b>montaraz</b> que
-                habitaba en la zona más profunda del bosque. La principal característica de dicha comunidad fue su
-                agreste manera de vivir y su resistencia a la influencia externa</p>
-            Aplicando los conceptos relacionados a la palabra marcada en negrita, seleccione el término excluido:<br>
-            <input type="radio" name="q63" value="a">Silvestre<br>
-            <input type="radio" name="q63" value="b">Indomita<br>
-            <input type="radio" name="q63" value="c">Rustico<br>
-            <input type="radio" name="q63" value="d">Afable<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Lorena es una mujer con un carácter particular. Durante mucho tiempo fue víctima de violencia por parte
-                de su pareja Ella solla actuar frenéticamente, sin embargo, después de su divorcio, ella ha decidido
-                superar situaciones traumáticas Su médico le recomienda: acudir a sus terapias, realizar deporte y
-                dedicar tiempo para si mismo.</p>
-            Aplicando los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea<br>
-            <input type="radio" name="q64" value="a">Un clavo saca a otro clavo<br>
-            <input type="radio" name="q64" value="b">Más vale estar solo que mal acompañado<br>
-            <input type="radio" name="q64" value="c">Ojos que no ven corazón que no siente<br>
-            <input type="radio" name="q64" value="d">Quien siembra vientos, cosecha tempestades.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Miguel trabaja en el servicio de fisioterapia en el hospital de la ciudad, él ha analizado las
-                oportunidades de crecimiento que podria tener en su trabajo actual, pero, no tiene un panorama
-                alentador, por lo tanto. Miguel está considerando cambiarse de trabajo y al mismo tiempo emprender su
-                negocio propio</p>
-            Aplique los conceptos relacionados en el texto presentado, seleccione el refrán que resuma la idea:<br>
-            <input type="radio" name="q65" value="a">Quien mucho abarca, poco aprieta.<br>
-            <input type="radio" name="q65" value="b">No por mucho madrugar amanece más temprano<br>
-            <input type="radio" name="q65" value="c">Al mal tiempo, buena cara<br>
-            <input type="radio" name="q65" value="d">Más vale prevenir que lamentar<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Un grupo de amigos se encuentran realizando una caminata en el Parque Nacional Cotopaxi. Al darse cuenta
-                de las condiciones climáticas, se percatan que se aproxima una nubada, por lo tanto, ellos deciden
-                <b>guarecer</b> en el lugar más próximo.
-            </p>
-            Aplicando los conceptos relacionados a la palabra marcada en negrita, seleccione el término excluido:<br>
-            <input type="radio" name="q66" value="a">Refugiar<br>
-            <input type="radio" name="q66" value="b">Amparar<br>
-            <input type="radio" name="q66" value="c">Guardar<br>
-            <input type="radio" name="q66" value="d">Contener<br>
-        </div>
-
-        <div class="pregunta">
-            <p>La Literatura, con sus relatos, protagonistas y ambientaciones, no solo reflejan la riqueza cultural de
-                una comunidad. sino que, además desempeña un papel fundamental en el enriquecimiento y arraigo de la
-                identidad cultural de sus integrantes. Desde las historias tradicionales hasta las creaciones más
-                recientes, la Literatura proporciona acceso a una amplia gama de experiencias y visiones del mundo,
-                ofreciendo a las personas la oportunidad de sumergirse en su legado cultural y encontrar un sentido de
-                pertenencia más profundo.</p>
-            Infiera la información proporcionada<br>
-            <input type="radio" name="q67" value="a">La Literatura es una forma de sumergirse en las historias
-            tradicionales de un pueblo.<br>
-            <input type="radio" name="q67" value="b">La identidad cultural se forma únicamente a través de los relatos
-            que presenta la Literatura.<br>
-            <input type="radio" name="q67" value="c">La Literatura muestra la diversidad cultural y fomenta la identidad
-            cultural.<br>
-            <input type="radio" name="q67" value="d">La identidad cultural se fomenta al encontrar sentido de
-            pertenencia en una sociedad<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Complete la siguiente serie: arma, bocina, cocina, </p>
-            <input type="radio" name="q68" value="a">bobina<br>
-            <input type="radio" name="q68" value="b">turbina<br>
-            <input type="radio" name="q68" value="c">camino<br>
-            <input type="radio" name="q68" value="d">dado<br>
-        </div>
-
-        <div class="pregunta">
-            <p>En un laboratorio de fisica Andrea contribuye en un experimento con sus compañeros de clase. Al obtener y
-                registrar los resultados que arrojó el experimento, se percata que la temperatura del reactivo se
-                encuentra elevada en relación a las métricas consideradas para el proceso, también verifica que la tasa
-                de reacción se encuentra en un rango superior</p>
-            Infiera la información proporcionada:<br>
-            <input type="radio" name="q69" value="a">La temperatura del reactivo tiene correlación con la tasa de
-            reacción<br>
-            <input type="radio" name="q69" value="b">Existe una variación entre la temperatura del reactivo y la tasa de
-            reacción<br>
-            <input type="radio" name="q69" value="c">La temperatura del reactivo tiene una relación directa con la tasa
-            de reacción<br>
-            <input type="radio" name="q69" value="d">La temperatura del reactivo y la tasa de reacción muestran
-            cambios.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Una revista científica ha publicado los resultados de un estudio sobre los medios utilizados para revisar
-                noticias actuales en un grupo de estudiantes de entre 18 a 25 años Los datos muestran que, gran parte de
-                la población accede a noticias compartidas por sus contactos mediante el uso de redes sociales. mientras
-                que una proporción menor acude a revisar noticias por medios tradicionales.</p>
-            Infiera la información proporcionada<br>
-            <input type="radio" name="q70" value="a">La mayoría de estudiantes de entre 18 y 25 años desconfía de medios
-            tradicionales.<br>
-            <input type="radio" name="q70" value="b">una pequeña proporción recurre a revisar noticias en medios
-            tradicionales<br>
-            <input type="radio" name="q70" value="c">Las redes sociales son usadas por la mayoría de estudiantes para
-            revisar noticias.<br>
-            <input type="radio" name="q70" value="d">Los estudiantes revisan noticias por redes sociales y medios
-            tradicionales.<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Jorge es el ingeniero responsable del área industrial de una empresa de alimentos En los últimos meses,
-                su dependencia ha presentado varios problemas considerables que requieren soluciones inmediatas antes
-                que generen daños en la organización Para poder cumplirlo, requiere de un modelo estructural en el área
-                de producción</p>
-            Aplique los conceptos relacionados en la siguiente analogía: "ingeniería es a soluciones como es a<br>
-            <input type="radio" name="q71" value="a">Arquitectura – Diseño<br>
-            <input type="radio" name="q71" value="b">Robótica – Automatización<br>
-            <input type="radio" name="q71" value="c">Producción – Producto<br>
-            <input type="radio" name="q71" value="d">Sistemas-Seguridad<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Complete la siguiente serie: camino, elefante, goma,___</p>
-            <input type="radio" name="q72" value="a">tijera<br>
-            <input type="radio" name="q72" value="b">iguana<br>
-            <input type="radio" name="q72" value="c">marcador<br>
-            <input type="radio" name="q72" value="d">oso<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Teresa requiere componer una canción a base de versos. Para ello, su maestro le enseña a tocar guitarra,
-                sin embargo Teresa ha encontrado dificultades para identificar los acordes adecuados, ella espera que su
-                aprendizaje no se detenga por este problema</p>
-            Aplique los conceptos relacionados en la siguiente analogía: "canción es a como a versos<br>
-            <input type="radio" name="q73" value="a">Letras-comedia<br>
-            <input type="radio" name="q73" value="b">Acordes poema<br>
-            <input type="radio" name="q73" value="c">Ritmo copla<br>
-            <input type="radio" name="q73" value="d">Melodia-artista<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Javier es un fotógrafo de la ciudad que labora en el parque central. Él es reconocido por su brillante
-                trabajo al capturar en una imagen, las diversas emociones de sus clientes y combinarlos con el panorama
-                céntrico de la zona. Esto se debe a la cámara profesional que adquirió hace dos meses, pues, dicho
-                objeto se convierte en su herramienta de trabajo</p>
-            Aplique los conceptos relacionados en la siguiente analogía: "fotógrafo es a cámara como "cirujano es a<br>
-            <input type="radio" name="q74" value="a">Bisturí<br>
-            <input type="radio" name="q74" value="b">Bata<br>
-            <input type="radio" name="q74" value="c">Jeringa<br>
-            <input type="radio" name="q74" value="d">Estetoscopio<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Juan es el ejecutivo de cobranzas de un banco. Durante el mes de octubre no ha logrado cumplir la meta
-                propuesta por ello, decide aplicar estrategias que le permitan cumplir con su objetivo, una de ellas es
-                presentarle a su jefe un informe detallado sobre las actividades que va a desarrollar, en dicho
-                documento incluye el <b>emolumento</b> para su desarrollo</p>
-            Identifique el sinónimo de la palabra marcada en negrita "emolumento"<br>
-            <input type="radio" name="q75" value="a">Producto<br>
-            <input type="radio" name="q75" value="b">Pillaje<br>
-            <input type="radio" name="q75" value="c">Beneficio<br>
-            <input type="radio" name="q75" value="d">Aumento<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Juan es el ejecutivo de cobranzas de un banco. Durante el mes de octubre no ha logrado cumplir la
-                <b>meta</b> propuesta por ello, decide aplicar estrategias que le permitan cumplir con su objetivo, una
-                de ellas es presentarle a su jefe un informe detallado sobre las actividades que va a desarrollar, en
-                dicho documento incluye el <b>emolumento</b> para su desarrollo
-            </p>
-            Identifique el sinónimo de la palabra marcada en negrita "emolumento"<br>
-            <input type="radio" name="q76" value="a">Producto<br>
-            <input type="radio" name="q76" value="b">Pillaje<br>
-            <input type="radio" name="q76" value="c">Beneficio<br>
-            <input type="radio" name="q76" value="d">Objetivo<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Pamela desea adoptar una mascota para compañía en el hogar. Por un lado, José, su amigo de infancia, le
-                ofrece un can de raza grande Por otro lado. Emilia, su compañera de clase, le trae un cachorro de raza
-                pequeña. Al contar con dos opciones. Pamela analiza varios aspectos, entre ellos, la dificultad por
-                cuidar, entrenar y controlar a cada una de las razas</p>
-            Infiera la información proporcionada<br>
-            <input type="radio" name="q77" value="a">Las mascotas requieren de cuidados especiales, dependiendo la
-            raza.<br>
-            <input type="radio" name="q77" value="b">Las mascotas se convierten en compañía en los hogares para adultos
-            y niños<br>
-            <input type="radio" name="q77" value="c">Las mascotas requieren dedicación y cuidados, independientemente la
-            raza.<br>
-            <input type="radio" name="q77" value="d">Las mascotas de raza grande y pequeña tienen un comportamiento
-            similar<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Luciano dirige la compañía con excelentes condiciones y recursos financieros en su administración se
-                observa que rodas los miembros del equipo destacan por su eficiencia y logros. Sin embargo, al
-                enfrentarse a situaciones adversas Luciano comienza a mostrar carencias en su desempeño, por lo que los
-                miembros de la compañía dudan que su liderazgo haya sido verdadero.</p>
-            Aplique los conceptos relacionados al texto compartido, seleccione el refrán que mejor describa al
-            argumento<br>
-            <input type="radio" name="q78" value="a">Camarón que se duerme, se lo lleva la corriente<br>
-            <input type="radio" name="q78" value="b">Cuando llueve y nace sol, deja el perro a su pastor<br>
-            <input type="radio" name="q78" value="c">En buen viento, cualquier velero navega<br>
-            <input type="radio" name="q78" value="d">Cuando el rio sueña, agua lleva<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Raúl es un comerciante de vehículos que trabaja en la ciudad hace 3 años. Sus clientes lo reconocen como
-                un vendedor legal y justo en las transacciones que ha realizado. Un dia, en la feria de autos, Raúl se
-                interesa en un carro por su aparente cuidado y precio, sin embargo, al revisar los documentos,
-                identifican <b>espurio</b> en un certificado, lo que genera duda e interés por el estado del vehículo
-            </p>
-            Identifique el sinónimo de la palabra marcada en negrita: "espurio"<br>
-            <input type="radio" name="q79" value="a">Decoro<br>
-            <input type="radio" name="q79" value="b">Falseado<br>
-            <input type="radio" name="q79" value="c">Yerro<br>
-            <input type="radio" name="q79" value="d">Pifia<br>
-        </div>
-
-        <div class="pregunta">
-            <p>Dayana trabaja en una empresa de alimentos de consumo masivo que es líder en la zona centro, La empresa
-                aplica canales de distribución eficientes para mantener un adecuado abastecimiento en todos los puntos
-                de venta Dayana aprovecha la disponibilidad de productos para generar el nivel de ventas requerido,
-                utilizando estrategias que incluyan beneficios a los clientes</p>
-            Aplique los conceptos relacionados en la siguiente analogía: "logística es a distribución como “--------- es a -------------“<br>
-            <input type="radio" name="q80" value="a">Mercadotecnia es a promoción.<br>
-            <input type="radio" name="q80" value="b">Ventas es a dinero<br>
-            <input type="radio" name="q80" value="c">Marketing es a publicidad<br>
-            <input type="radio" name="q80" value="d">Mercadeo es a producto<br>
-        </div>
-
-        <button id="prevButton" onclick="preguntaAnterior()" disabled>Anterior</button>
-        <button id="nextButton" onclick="siguientePregunta()">Siguiente</button>
-        <h3 id="resultado"></h3>
-        <h3 id="puntaje"></h3>
-        <div id="detalleResultados"></div>
     </div>
     <footer>García Moreno y Véloz esquina, Riobamba, Ecuador</footer>
     <script>
+
+        const CONTRASEÑA_CORRECTA = "0979220756";
+
+        function pedirContraseña() {
+            document.getElementById("contenidoTest").style.display = "none";
+        }
+
+        function verificarContraseña() {
+            let inputPassword = document.getElementById("passwordInput").value;
+
+            if (inputPassword === CONTRASEÑA_CORRECTA) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("contenidoTest").style.display = "block";
+                cargarRespuestasGuardadas();
+                iniciarTemporizador();
+            } else {
+                alert("Contraseña incorrecta, intenta de nuevo.");
+            }
+        }
+
         let preguntaActual = parseInt(localStorage.getItem("preguntaActual")) || 0; // Cargar pregunta guardada o iniciar en 0
         let preguntas = document.querySelectorAll(".pregunta");
         let tiempoRestante = parseInt(localStorage.getItem("tiempoRestante")) || 3600; // Cargar tiempo o iniciar en 1 hora;
@@ -1210,7 +1423,7 @@
 
         function mostrarResultados() {
             clearInterval(timer);
-    localStorage.removeItem("tiempoRestante"); // Limpiar tiempo restante al finalizar
+            localStorage.removeItem("tiempoRestante"); // Limpiar tiempo restante al finalizar
 
             let aciertos = 0;
             let puntajeFinal = 0;
@@ -1268,32 +1481,14 @@
         }
 
         function reiniciarTest() {
-        localStorage.clear();
-        location.reload();
-    }
+            localStorage.clear();
+            location.reload();
+        }
         window.onload = function () {
             cargarRespuestasGuardadas();
             iniciarTemporizador();
         };
     </script>
-	<script type="module">
-		// Import the functions you need from the SDKs you need
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-		// TODO: Add SDKs for Firebase products that you want to use
-		// https://firebase.google.com/docs/web/setup#available-libraries
-		
-		// Your web app's Firebase configuration
-		const firebaseConfig = {
-		apiKey: "AIzaSyDNmOGc-JbbIltCeB4r300JBf2NZ6WEDAA",
-		authDomain: "preuniversitario-san-marcos.firebaseapp.com",
-		projectId: "preuniversitario-san-marcos",
-		storageBucket: "preuniversitario-san-marcos.firebasestorage.app",
-		messagingSenderId: "168660856643",
-		appId: "1:168660856643:web:c225386968c7d93affc9f6"
-		};
-		
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
-	</script>
 </body>
+
 </html>
