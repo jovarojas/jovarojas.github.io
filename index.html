@@ -1359,21 +1359,24 @@
         let respuestasUsuario = JSON.parse(localStorage.getItem("respuestasUsuario")) || {};
 
         function iniciarTemporizador() {
+            if (timer) {
+                clearInterval(timer); // Detener cualquier temporizador anterior
+            }
+            
             timer = setInterval(() => {
                 tiempoRestante--;
                 localStorage.setItem("tiempoRestante", tiempoRestante); // Guardar tiempo restante
-
+        
                 let minutos = Math.floor(tiempoRestante / 60);
                 let segundos = tiempoRestante % 60;
                 document.getElementById("timer").innerText = `Tiempo restante: ${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
-
+        
                 if (tiempoRestante <= 0) {
                     clearInterval(timer);
                     mostrarResultados();
                 }
             }, 1000);
         }
-
         function actualizarContador() {
             document.getElementById("contador").innerText = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
             localStorage.setItem("preguntaActual", preguntaActual); // Guardar progreso
