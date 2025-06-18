@@ -1,4 +1,5 @@
-HTML, CSS Y JavaScript:
+# Simulador test
+Usando HTML, CSS Y JavaScript:
 
 Simulador de 80 preguntas de pruebas de acceso a la universidad del tipo UNACH (Universidad Nacional de Chimborazo - Riobamba Ecuador).
 
